@@ -1,10 +1,10 @@
 #include "vector.h"
 
-void init(vector* v){
-	*v = (vector) malloc(sizeof(vector));
-	(*v)->size = 10;
+void init(vector* v, int size){
+	*v = (vector) malloc(VECTOR_SIZE);
+	(*v)->size = size;
 	(*v)->last = -1;
-	(*v)->data = (void*) malloc(sizeof(void*)*(*v)->size);
+	(*v)->data = (void*) calloc((*v)->size, sizeof(void*));
 }
 
 void move(vector v){
@@ -46,7 +46,7 @@ void change(vector v, int index, void* data){
 	v->data[index] = data;
 }
 
-void erase(vector v, int index, void* data){
+void erase(vector v, int index){
 	memmove(v->data+index, v->data+index+1, sizeof(void*)*(v->last-index));
 	v->last--;
 }
@@ -81,6 +81,61 @@ void sort(vector v, int (*cmp)(const void*, const void*)){
 }
 
 
+void minit(matrix* m, int rows, int columns){
+	*m = (matrix) malloc (MATRIX_SIZE);
+	(*m)->rows = rows;
+	(*m)->columns = columns;
+	(*m)->vectors = (vector*)malloc(sizeof(vector)*columns);
+	for(int i = 0; i < columns; i++){
+		init((*m)->vectors+i, rows + 1);
+		(*m)->vectors[i]->last = rows - 1;
+	}
+}
+
+void mchange(matrix m, int row, int column, void* data){
+	return change(m->vectors[column], row, data);
+}
+
+void* mget(matrix m, int row, int column){
+	return get(m->vectors[column], row);
+}
+
+int columns(matrix m){
+	return m->columns;
+}
+
+int rows(matrix m){
+	return m->rows;
+}
+
+void addcolumn(matrix m, int index){
+	
+	vector* vs = (vector*) malloc(sizeof(vector)*(++(m->columns)));
+	
+	for(int i = 0; i < index; i++) vs[i] = m->vectors[i];
+	init(vs+index, rows(m) + 1);
+	for(int i = index + 1; i < m->columns; i++) vs[i] = m->vectors[i-1];
+	
+	free(m->vectors);
+	m->vectors = vs;
+}
+
+void erasecolumn(matrix m, int index){
+	vector* vs = (vector*) malloc(sizeof(vector)*((m->columns)-1));
+	for(int i = 0; i < index; i++) vs[i] = m->vectors[i];
+	for(int i = index + 1; i < m->columns; i++) vs[i-1] = m->vectors[i];
+	clear(m->vectors[index]);
+	free(m->vectors);
+	m->vectors = vs;
+	m->columns--;
+}
+
+void mclear(matrix m){
+	for(int i = 0; i < m->columns; i++) clear(m->vectors[i]);
+	free(m->vectors);
+	free(m);
+}
+
 //===========================================================================
 
 #include <stdio.h>
@@ -96,21 +151,57 @@ void print(vector v){
 	printf("\n");
 }
 
+void mprint(matrix m){
+	printf("\nrows: %d columns: %d\n", rows(m), columns(m));
+	for(int i = 0; i < rows(m); i++){
+		for(int j = 0; j < columns(m); j++){
+			fflush(stdout);
+			printf("%4d", *((int*)mget(m, i, j)));
+		}
+			
+		printf("\n");
+	}
+	printf("\n");
+}
+
 int main(int argc, char* argv[]){
 	freopen("output.txt", "w", stdout);
 	vector v;
-	init(&v);
+	init(&v, 5);
 	int mass[1000];
+	mass[100] = 0;
 	for(int i = 0; i < 50; i++){
 		mass[i] = rand()%97;
 		add(v, 0, mass+i);
-		if(i%2) erase(v, 0, mass+i);
+		if(i%2) erase(v, 0);
 	}
 	print(v);
 	sort(v, cmp);
 	print(v);	
-	printf("\n%d ", v->size);
+	printf("\n%d ", VECTOR_SIZE);
 	
+	matrix m;
+	minit(&m, 15, 20);
+	for(int i = 0; i < rows(m); i++)
+		for(int j = 0; j < columns(m); j++)
+			mchange(m, i, j, mass+(i+j)%50);
+	mprint(m);
+	
+	addcolumn(m, 2);
+	for(int i = 0; i < rows(m); i++) mchange(m, i, 2, mass+100);
+	addcolumn(m, 0);
+	for(int i = 0; i < rows(m); i++) mchange(m, i, 0, mass+100);
+	addcolumn(m, 10);
+	for(int i = 0; i < rows(m); i++) mchange(m, i, 10, mass+100);
+	mprint(m);
+	
+	erasecolumn(m, 0);
+	erasecolumn(m, 0);
+	erasecolumn(m, 0);
+	erasecolumn(m, 0);
+	
+	mprint(m);
+	mclear(m);
 	return 0;
 }
 
