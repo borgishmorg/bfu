@@ -20,8 +20,8 @@ $(LIB)/libvector.so: $(OBJ)/vector.o
 $(OBJ)/main.o: $(SRC)/main.c $(INCLUDE)/vector.h
 	gcc -std=c99 -I$(INCLUDE) -c -o $(OBJ)/main.o $(SRC)/main.c 
 	
-$(OBJ)/vector.o: $(SRC)/vector.c 
-	gcc -std=c99 -fPIC -c -o $(OBJ)/vector.o $(SRC)/vector.c
+$(OBJ)/vector.o: $(SRC)/vector.c $(INCLUDE)/vector.h
+	gcc -std=c99 -I$(INCLUDE) -fPIC -c -o $(OBJ)/vector.o $(SRC)/vector.c
 	
 $(BIN):
 	mkdir -p $(BIN)
