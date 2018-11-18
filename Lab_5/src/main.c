@@ -40,6 +40,8 @@ int main(int argc, char* argv[]){
 	sort(v, cmp);
 	print(v);	
 	printf("\n%d ", VECTOR_SIZE);
+	clear(v);
+	
 	
 	matrix m;
 	minit(&m, 15, 20);
