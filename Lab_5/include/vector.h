@@ -5,8 +5,6 @@
 #define VECTOR_SIZE sizeof(void**)+2*sizeof(int)
 #define MATRIX_SIZE sizeof(void**)+2*sizeof(int)
 
-void* EMPTY;
-
 typedef struct {
 	void** data;
 	int last;
@@ -32,3 +30,10 @@ void clear(vector v);
 void sort(vector v, int (*cmp)(const void*, const void*));
 
 void minit(matrix* m, int rows, int columns);
+void mchange(matrix m, int row, int column, void* data);
+void* mget(matrix m, int row, int column);
+int columns(matrix m);
+int rows(matrix m);
+void addcolumn(matrix m, int index);
+void erasecolumn(matrix m, int index);
+void mclear(matrix m);
