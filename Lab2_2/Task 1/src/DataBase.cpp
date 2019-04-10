@@ -14,7 +14,6 @@ Comparator DataBaseNS::getComparatorByCookName(std::string name){
     return [name](const Review & review){
         return review.cook.getName() == name;
     };
-
 }
 
 Comparator DataBaseNS::getComparatorByDishName(std::string name){
@@ -48,13 +47,9 @@ Comparator DataBaseNS::getComparatorByRate(int rate){
 =================== DataBase methods =======================
 */
 
-DataBase::DataBase(){
+DataBase::DataBase(){}
 
-}
-
-DataBase::~DataBase(){
-
-}
+DataBase::~DataBase(){}
 
 void DataBase::addCook(std::string name){
     cooks.insert({name, Cook(name)});
@@ -71,9 +66,7 @@ void DataBase::addGuest(std::string name){
 void DataBase::addReview(std::string guestName, std::string dishName, std::string cookName, int rate){
     try{
         guests.at(guestName).addReview({dishes.at(dishName), cooks.at(cookName), rate});
-    }catch(...){
-        //exeption here
-    }
+    }catch(...){}
 }
 
 
@@ -81,7 +74,7 @@ double DataBase::getStatistics(Comparator cmp)const{
     double numerator = 0, 
            denominator = 0;
     for(const auto & guest: guests){
-        if(guest.second.getWeight() > 0){
+        if(guest.second.getWeight() > 0 && guest.second.getRate(cmp) > 0){
             numerator += guest.second.getWeight() * guest.second.getRate(cmp);
             denominator += guest.second.getWeight();
         }

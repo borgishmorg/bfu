@@ -6,13 +6,9 @@ using DataBaseNS::Review;
 using DataBaseNS::Guest;
 
 Guest::Guest(std::string name):
-name_(name){
-    weight_ = 0;
-}
+    name_(name),weight_(0){}
 
-Guest::~Guest(){
-
-}
+Guest::~Guest(){}
 
 /*
 ================= PUBLIC METHODS ========================

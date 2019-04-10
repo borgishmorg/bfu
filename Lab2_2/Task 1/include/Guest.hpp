@@ -19,10 +19,9 @@ namespace DataBaseNS
             dish(dish_), cook(cook_), rate(rate_){}
         Review(const Cook & cook_, const Dish & dish_, const int rate_):
             dish(dish_), cook(cook_), rate(rate_){}
-        
     };
     
-    typedef  std::function<bool(const Review &)> Comparator;
+    typedef std::function<bool(const Review &)> Comparator;
 
     class Guest
     {
@@ -39,8 +38,5 @@ namespace DataBaseNS
 
         void updateWeight();
     };
-        
-    
-
 } 
 #endif

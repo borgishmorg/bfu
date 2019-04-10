@@ -5,7 +5,6 @@
 #include "Dish.hpp"
 #include "Guest.hpp"
 
-#include <iostream>
 #include <map>
 #include <string>
 #include <functional>
