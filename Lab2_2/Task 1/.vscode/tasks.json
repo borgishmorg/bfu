@@ -1,0 +1,26 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build hello world",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-std=c++14",
+                "-I\"include\"",
+                "-g",
+                "-o",
+                "Main",
+                "src/Guest.cpp",
+                "src/Cook.cpp",
+                "src/Dish.cpp",
+                "src/DataBase.cpp",
+                "src/Main.cpp"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
