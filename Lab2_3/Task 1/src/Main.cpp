@@ -7,65 +7,51 @@
 using namespace Arena;
 using namespace std;
 
+int roundCounter = 1;
+
 string player1 = "Player 1";
 string player2 = "Player 2";
-string heroType1;
-string heroType2;
 
 unique_ptr<Hero> hero1;
 unique_ptr<Hero> hero2;
 
-unique_ptr<Hero> getHeroByString(std::string hero){
-    if(hero == "Ogre")
-        return make_unique<Ogre>();
-    if(hero == "Fairy")
-        return make_unique<Fairy>();
-    if(hero == "Vampire")
-        return make_unique<Vampire>();
-    if(hero == "Knight")
-        return make_unique<Knight>();
-    throw "\""+hero+"\" hero dosn't exist";
+unique_ptr<Hero> inputHero(){
+    string hero;
+    while(true){
+        cout << "Enter the name of your hero:" << endl;
+        cin >> hero;
+        if(hero == "Ogre")
+            return make_unique<Ogre>();
+        if(hero == "Fairy")
+            return make_unique<Fairy>();
+        if(hero == "Vampire")
+            return make_unique<Vampire>();
+        if(hero == "Knight")
+            return make_unique<Knight>();
+        cout << "\"" << hero << "\" hero dosn't exist\nTry again." << endl;
+    }
+    
+    throw ;
 }
 
 void init(){
-    selectHero1:
-    try
-    {
-        cout << "\"" << player1 << "\" enter the name of your hero:" << endl;
-        cin >> heroType1;
-        hero1 = getHeroByString(heroType1);
-    }
-    catch(string e)
-    {
-        cout << e << "\nTry again." << endl;
-        goto selectHero1;
-    }
-
-    selectHero2:
-    try
-    {
-        cout << "\"" << player2 << "\" enter the name of your hero:" << endl;
-        cin >> heroType2;
-        hero2 = getHeroByString(heroType2);
-    }
-    catch(string e)
-    {
-        cout << e << "\nTry again." << endl;
-        goto selectHero2;
-    }
+    cout << "\"" << player1 << "\""<< endl; 
+    hero1 = inputHero();
+    cout << "\"" << player2 << "\""<< endl; 
+    hero2 = inputHero();
 }
 
 bool isEnd(){
     if (!hero1->isAlive() && !hero2->isAlive()){
-        cout << "Friendship won" << endl;
+        cout << "\nFriendship won" << endl;
         return true;
     }
     if (hero1->isAlive() && !hero2->isAlive()){
-        cout << player1 << " won" << endl;
+        cout << "\n" << player1 << " won" << endl;
         return true;
     }
     if (!hero1->isAlive() && hero2->isAlive()){
-        cout << player2 << " won" << endl;
+        cout << "\n" << player2 << " won" << endl;
         return true;
     }
     return false;
@@ -77,31 +63,22 @@ bool play(){
     string evasionPlayer1;
     string evasionPlayer2;
 
-    int initiativeHero1;
-    int initiativeHero2;
+    cout << "=========================== Round: " << roundCounter << "===========================" << endl;
+    cout << hero1->getName() << " ( " << *hero1 << " )"<< endl;
+    cout << hero2->getName() << " ( " << *hero2 << " )"<< endl;
 
-    cout << heroType1 << " ( " << *hero1 << " )"<< endl;
-    cout << heroType2 << " ( " << *hero2 << " )"<< endl;
-
-    hero1->rest();
-    hero2->rest();
-    hero1->setEvasionType(NO_TYPE);
-    hero2->setEvasionType(NO_TYPE);
-
-    initiativeHero1 = hero1->getInitiative();
-    initiativeHero2 = hero2->getInitiative();
-    
-    if(initiativeHero1 > 0){
+    if(hero1->getInitiative() > 0){
         cout << "Enter " << player1 << " attack and evasion type:" << endl;
         cin >> attackPlayer1 >> evasionPlayer1;
     }
-    if(initiativeHero2 > 0){
+    if(hero2->getInitiative() > 0){
         cout << "Enter " << player2 << " attack and evasion type:" << endl;
         cin >> attackPlayer2 >> evasionPlayer2;
     }
     hero1->setEvasionType(stringToAttackType(evasionPlayer1));
     hero2->setEvasionType(stringToAttackType(evasionPlayer2));
 
+    cout << "\tLog:\n";
 
     if(hero1->attack(*hero2, stringToAttackType(attackPlayer1)))
         cout << "Success" << endl;
@@ -113,11 +90,14 @@ bool play(){
     else
         cout << "Failure" << endl;
     
+    hero1->rest();
+    hero2->rest();
+
     return !isEnd();
 }
 
 int main(){
     init();
-    while(play());    
+    while(play()) ++roundCounter;    
     return 0;
 }

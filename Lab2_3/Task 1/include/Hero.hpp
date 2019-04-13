@@ -13,7 +13,7 @@ namespace Arena{
     class Hero{
         public:
 
-            Hero(int hp);
+            Hero(std::string name, int hp);
             ~Hero();
 
             virtual bool attack(Hero &, AttackType) = 0;
@@ -23,12 +23,15 @@ namespace Arena{
             virtual void printParams(std::ostream &) const;
 
             void setEvasionType(AttackType);
+            const std::string & getName() const;
             const int getHp() const;
             const int getInitiative() const;
             const bool isAlive() const;
             const bool isPoisoned() const;
         protected:
+            std::string name_;
             int hp_;
+            int hpDelta_;
             int initiative_;
             int initiativeDelta_;
             int durationOfPoisoning_;

@@ -5,7 +5,7 @@ using Arena::Ogre;
 using Arena::Hero;
 
 Ogre::Ogre():
-    Arena::Hero(200){}
+    Arena::Hero("Ogre", 200){}
 
 Ogre::~Ogre(){};
 

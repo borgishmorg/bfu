@@ -5,7 +5,7 @@ using Arena::Hero;
 using Arena::AttackType;
 
 Fairy::Fairy():
-    Hero(30){}
+    Hero("Fairy", 30){}
 
 Fairy::~Fairy(){};
 

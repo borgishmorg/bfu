@@ -5,7 +5,7 @@ using Arena::Hero;
 using Arena::Vampire;
 
 Vampire::Vampire():
-    Hero(100){};
+    Hero("Vampire", 100){};
 
 Vampire::~Vampire(){};
 
@@ -17,7 +17,7 @@ bool Vampire::attack(Hero & hero, AttackType type){
             case UP:{
                 std::cout << "Vampire is stealing stamina of the enemy" << std::endl;
                 if(hero.takeDamage(15, 0, UP)){
-                    hp_ += 15;
+                    hpDelta_ += 15;
                     return true;
                 }else
                     return false;          
