@@ -1,0 +1,23 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "g++.exe build active file",
+      "command": "g++.exe",
+      "args": [
+        "-std=c++14",
+        "-Iinclude",
+        "-o",
+        "Main.exe",
+        "src\\Main.cpp",
+        "src\\Hero.cpp",
+        "src\\Ogre.cpp"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}
