@@ -6,7 +6,7 @@
 
 namespace Arena{
     
-    enum AttackType{NO_TYPE, UP, MIDDLE, DOWN};
+    enum AttackType{NO_TYPE, UP, MIDDLE, DOWN, THANOS};
 
     AttackType stringToAttackType(std::string);
 

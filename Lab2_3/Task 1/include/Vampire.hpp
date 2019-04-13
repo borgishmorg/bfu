@@ -1,3 +1,7 @@
+#ifndef __VAMPIRE__
+#define __VAMPIRE__
+
+
 #include "Hero.hpp"
 
 namespace Arena{
@@ -9,3 +13,5 @@ namespace Arena{
             virtual bool attack(Hero & hero, AttackType type) override;
     };
 }
+
+#endif

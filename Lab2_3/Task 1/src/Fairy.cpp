@@ -26,9 +26,12 @@ bool Fairy::attack(Hero & hero, AttackType type){
                     return hero.takeDamage(2, 0, MIDDLE);
             }
             case DOWN:{
-                std::cout << "Fairy is giving her enemy an old fruit" << std::endl; 
-                hero.takePoison(10);
-                return true;
+                std::cout << "Fairy is giving her enemy an old fruit" << std::endl;
+                if(hero.takeDamage(0, 0, DOWN)){
+                    hero.takePoison(10);
+                    return true;
+                }
+                return false;                
             }
             default:{
                 std::cout << "Fairy is doing nothing" << std::endl;

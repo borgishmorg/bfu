@@ -28,6 +28,8 @@ unique_ptr<Hero> inputHero(){
             return make_unique<Vampire>();
         if(hero == "Knight")
             return make_unique<Knight>();
+        if(hero == "Thanos")
+            return make_unique<Thanos>();
         cout << "\"" << hero << "\" hero dosn't exist\nTry again." << endl;
     }
     

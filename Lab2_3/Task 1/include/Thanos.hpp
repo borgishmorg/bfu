@@ -1,23 +1,18 @@
-#ifndef __KNIGHT__
-#define __KNIGHT__
+#ifndef __THANOS__
+#define __THANOS__
 
 #include "Hero.hpp"
 
 namespace Arena{
-    class Knight: public Hero{
+    class Thanos: public Hero{
         public:
-            Knight();
-            ~Knight();
+            Thanos();
+            ~Thanos();
 
             virtual bool attack(Hero & hero, AttackType type) override;
             virtual bool takeDamage(int hpDamage, int initiativeDamage, AttackType type) override;
-            virtual void rest() override;
+            
             virtual void printParams(std::ostream & out) const override;
-        protected:
-            int armorDelta_;
-        private:
-            int armor_;
-            int maxArmor_;
     };
 }
 

@@ -19,8 +19,8 @@ bool Vampire::attack(Hero & hero, AttackType type){
                 if(hero.takeDamage(15, 0, UP)){
                     hpDelta_ += 15;
                     return true;
-                }else
-                    return false;          
+                }
+                return false;          
             }
             case MIDDLE:{
                 std::cout << "Vampire is hitting by sword" << std::endl;

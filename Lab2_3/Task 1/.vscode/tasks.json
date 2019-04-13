@@ -15,6 +15,7 @@
         "src\\Ogre.cpp",
         "src\\Vampire.cpp",
         "src\\Knight.cpp",
+        "src\\Thanos.cpp",
         "src\\Fairy.cpp"
       ],
       "group": {
