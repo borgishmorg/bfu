@@ -43,7 +43,7 @@ bool Knight::attack(Hero & hero, AttackType type){
 }
 
 bool Knight::takeDamage(int hpDamage, int initiativeDamage, AttackType type){
-    return Hero::takeDamage(std::max(hpDamage*armor_/100, 1), initiativeDamage, type);
+    return Hero::takeDamage(std::max(hpDamage*(100 - armor_)/100, 1), initiativeDamage, type);
 }
 
 void Knight::rest(){
