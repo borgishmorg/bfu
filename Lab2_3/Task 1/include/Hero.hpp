@@ -30,12 +30,13 @@ namespace Arena{
             const bool isPoisoned() const;
         protected:
             std::string name_;
-            int hp_;
             int hpDelta_;
-            int initiative_;
             int initiativeDelta_;
             int durationOfPoisoning_;
             AttackType evasionType_;
+        private:
+            int hp_;
+            int initiative_;
     };
 
 }

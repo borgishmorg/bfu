@@ -12,8 +12,9 @@ namespace Arena{
             virtual void printParams(std::ostream & out) const override;
 
         protected:
-            int armor_;
             int armorDelta_;
+        private:
+            int armor_;
             int maxArmor_;
     };
 }

@@ -10,8 +10,8 @@ Fairy::Fairy():
 Fairy::~Fairy(){};
 
 bool Fairy::attack(Hero & hero, AttackType type){
-    if(initiative_ > 0){
-        --initiative_;
+    if(getInitiative() > 0){
+        --initiativeDelta_;
         switch (type)
         {
             case UP:{

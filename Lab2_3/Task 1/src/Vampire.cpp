@@ -10,8 +10,8 @@ Vampire::Vampire():
 Vampire::~Vampire(){};
 
 bool Vampire::attack(Hero & hero, AttackType type){
-    if(initiative_ > 0){
-        --initiative_;
+    if(getInitiative() > 0){
+        --initiativeDelta_;
         switch (type)
         {
             case UP:{
@@ -24,11 +24,11 @@ bool Vampire::attack(Hero & hero, AttackType type){
             }
             case MIDDLE:{
                 std::cout << "Vampire is hitting by sword" << std::endl;
-                return hero.takeDamage(0.8*(100-hp_), 0, MIDDLE);
+                return hero.takeDamage(0.8*(100-getHp()), 0, MIDDLE);
             }
             case DOWN:{
                 std::cout << "Vampire is kicking his enemy" << std::endl;
-                return hero.takeDamage(0.5*hp_, 0, DOWN);
+                return hero.takeDamage(0.5*getHp(), 0, DOWN);
             }
             default:{
                 std::cout << "Vampire is doing nothing" << std::endl;
