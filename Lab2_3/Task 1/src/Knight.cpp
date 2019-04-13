@@ -45,3 +45,8 @@ bool Knight::attack(Hero & hero, AttackType type){
 bool Knight::takeDamage(int hpDamage, int initiativeDamage, AttackType type){
     return Hero::takeDamage(hpDamage*armor_/100, initiativeDamage, type);
 }
+
+void Knight::printParams(std::ostream & out) const{
+    Hero::printParams(out);
+    out << "; armor = " << armor_;
+}

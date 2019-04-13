@@ -1,5 +1,3 @@
-#include <string>
-#include <iostream>
 #include "Hero.hpp"
 
 using Arena::AttackType;
@@ -39,6 +37,10 @@ void Hero::rest(){
     durationOfPoisoning_ = std::max(durationOfPoisoning_ - 1, 0);
 }
 
+void Hero::printParams(std::ostream & out) const{
+    out << "hp = " << hp_ << "; initiative = " << initiative_ << "; duration of poisoning = " << durationOfPoisoning_;
+}
+
 void Hero::setEvasionType(AttackType type){
     evasionType_ = type;
 }
@@ -57,4 +59,9 @@ const bool Hero::isAlive() const{
 
 const bool Hero::isPoisoned() const{
     return durationOfPoisoning_ > 0;
+}
+
+std::ostream & operator<<(std::ostream & out, const Hero & hero){
+    hero.printParams(out);
+    return out;
 }

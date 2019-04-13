@@ -20,6 +20,7 @@ namespace Arena{
             virtual bool takeDamage(int hpDamage, int initiativeDamage, AttackType type);
             virtual bool takePoison(int durationOfPoisoning);
             virtual void rest();
+            virtual void printParams(std::ostream &) const;
 
             void setEvasionType(AttackType);
             const int getHp() const;
@@ -35,5 +36,7 @@ namespace Arena{
     };
 
 }
+
+std::ostream & operator<<(std::ostream & out, const Arena::Hero & hero);
 
 #endif
