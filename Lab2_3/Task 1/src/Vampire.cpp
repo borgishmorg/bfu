@@ -1,0 +1,42 @@
+#include "Vampire.hpp"
+
+using Arena::AttackType;
+using Arena::Hero;
+using Arena::Vampire;
+
+Vampire::Vampire():
+    Hero(100){};
+
+Vampire::~Vampire(){};
+
+bool Vampire::attack(Hero & hero, AttackType type){
+    if(initiative_ > 0){
+        --initiative_;
+        switch (type)
+        {
+            case UP:{
+                std::cout << "Vampire is stealing stamina of the enemy" << std::endl;
+                if(hero.takeDamage(15, 0, UP)){
+                    hp_ += 15;
+                    return true;
+                }else
+                    return false;          
+            }
+            case MIDDLE:{
+                std::cout << "Vampire is hitting by sword" << std::endl;
+                return hero.takeDamage(0.8*(100-hp_), 0, MIDDLE);
+            }
+            case DOWN:{
+                std::cout << "Vampire is kicking his enemy" << std::endl;
+                return hero.takeDamage(0.5*hp_, 0, DOWN);
+            }
+            default:{
+                std::cout << "Vampire is doing nothing" << std::endl;
+                return true;
+            }
+        }
+    }else{
+        std::cout << "Vampire can't attack now" << std::endl;
+        return false;
+    }
+}

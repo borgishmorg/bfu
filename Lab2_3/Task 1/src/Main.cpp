@@ -10,6 +10,12 @@ using namespace std;
 unique_ptr<Hero> getHeroByString(std::string hero){
     if(hero == "Ogre")
         return make_unique<Ogre>();
+    if(hero == "Fairy")
+        return make_unique<Fairy>();
+    if(hero == "Vampire")
+        return make_unique<Vampire>();
+    if(hero == "Knight")
+        return make_unique<Knight>();
     throw "\""+hero+"\" hero dosn't exist";
 }
 
@@ -25,6 +31,9 @@ void play(){
 
     unique_ptr<Hero> hero1;
     unique_ptr<Hero> hero2;
+
+    int initiativeHero1;
+    int initiativeHero2;
 
     selectHero1:
     try
@@ -55,16 +64,40 @@ void play(){
 
     
     while (true)
-    {
+    {   
+        cout << heroType1 << " ( " << hero1->getHp() << " )"<< endl;
+        cout << heroType2 << " ( " << hero2->getHp() << " )"<< endl;
         hero1->rest();
         hero2->rest();
-        cin >> attackPlayer1 >> evasionPlayer1 >> attackPlayer2 >> evasionPlayer2;
+        hero1->setEvasionType(NO_TYPE);
+        hero2->setEvasionType(NO_TYPE);
 
+        initiativeHero1 = hero1->getInitiative();
+        initiativeHero2 = hero2->getInitiative();
+        
+        if(initiativeHero1 > 0){
+            cout << "Enter " << player1 << " attack and evasion type:" << endl;
+            cin >> attackPlayer1 >> evasionPlayer1;
+        }
+        if(initiativeHero2 > 0){
+            cout << "Enter " << player2 << " attack and evasion type:" << endl;
+            cin >> attackPlayer2 >> evasionPlayer2;
+        }
         hero1->setEvasionType(stringToAttackType(evasionPlayer1));
         hero2->setEvasionType(stringToAttackType(evasionPlayer2));
 
-        hero1->attack(*hero2, stringToAttackType(attackPlayer1));
-        hero2->attack(*hero1, stringToAttackType(attackPlayer2));
+
+        if(hero1->attack(*hero2, stringToAttackType(attackPlayer1)))
+            cout << "Success" << endl;
+        else
+            cout << "Failure" << endl;
+        
+        if(hero2->attack(*hero1, stringToAttackType(attackPlayer2)))
+            cout << "Success" << endl;
+        else
+            cout << "Failure" << endl;
+        
+        
 
         if (!hero1->isAlive() && !hero2->isAlive()){
             cout << "Friendship won" << endl;

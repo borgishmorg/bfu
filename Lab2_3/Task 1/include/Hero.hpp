@@ -18,15 +18,19 @@ namespace Arena{
 
             virtual bool attack(Hero &, AttackType) = 0;
             virtual bool takeDamage(int hpDamage, int initiativeDamage, AttackType type);
+            virtual bool takePoison(int durationOfPoisoning);
             virtual void rest();
 
             void setEvasionType(AttackType);
             const int getHp() const;
             const int getInitiative() const;
             const bool isAlive() const;
+            const bool isPoisoned() const;
         protected:
             int hp_;
             int initiative_;
+            int initiativeDelta_;
+            int durationOfPoisoning_;
             AttackType evasionType_;
     };
 

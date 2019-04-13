@@ -1,2 +1,5 @@
 #include "Hero.hpp"
 #include "Ogre.hpp"
+#include "Fairy.hpp"
+#include "Vampire.hpp"
+#include "Knight.hpp"

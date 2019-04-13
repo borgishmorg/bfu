@@ -12,7 +12,10 @@
         "Main.exe",
         "src\\Main.cpp",
         "src\\Hero.cpp",
-        "src\\Ogre.cpp"
+        "src\\Ogre.cpp",
+        "src\\Vampire.cpp",
+        "src\\Knight.cpp",
+        "src\\Fairy.cpp"
       ],
       "group": {
         "kind": "build",

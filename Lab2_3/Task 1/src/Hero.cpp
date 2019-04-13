@@ -16,21 +16,27 @@ AttackType Arena::stringToAttackType(std::string type){
 }
 
 Hero::Hero(int hp):
-    hp_(hp), initiative_(0), evasionType_(NO_TYPE){}
+    hp_(hp), initiative_(0), initiativeDelta_(0), durationOfPoisoning_(0), evasionType_(NO_TYPE){}
 
 Hero::~Hero(){}
 
 bool Hero::takeDamage(int hpDmage, int initiativeDamage, AttackType type){
     if(evasionType_ == NO_TYPE || type != evasionType_){
         hp_ -= hpDmage;
-        initiative_ -= initiativeDamage;
+        initiativeDelta_ -= initiativeDamage;
         return true;
     }
     return false;
 }
 
+bool Hero::takePoison(int durationOfPoisoning){
+    durationOfPoisoning_ += durationOfPoisoning;
+}
+
 void Hero::rest(){
-    initiative_ = std::min(initiative_ + 1, 1);
+    initiative_ = std::min(initiative_ + initiativeDelta_ + 1, 1);
+    initiativeDelta_ = 0;
+    durationOfPoisoning_ = std::max(durationOfPoisoning_ - 1, 0);
 }
 
 void Hero::setEvasionType(AttackType type){
@@ -47,4 +53,8 @@ const int Hero::getInitiative() const{
 
 const bool Hero::isAlive() const{
     return (hp_ > 0);
+}
+
+const bool Hero::isPoisoned() const{
+    return durationOfPoisoning_ > 0;
 }
