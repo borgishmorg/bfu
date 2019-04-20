@@ -1,0 +1,27 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/include/*",
+                "${workspaceFolder}/include/screen/*",
+                "${workspaceFolder}/include/utilities/*",
+                "${workspaceFolder}/include/logic/*",
+                "${workspaceFolder}/include/screen/screen elements",
+                "${workspaceFolder}/include/logic/effects",
+                "${workspaceFolder}/include/logic/items"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "compilerPath": "C:\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\MinGW64\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\bin\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\gcc.exe",
+            "cStandard": "c11",
+            "cppStandard": "c++14",
+            "intelliSenseMode": "clang-x64"
+        }
+    ],
+    "version": 4
+}

@@ -1,0 +1,39 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "g++.exe build active file",
+            "command": "g++.exe",
+            "args": [
+                "-g",
+                "-std=c++14",
+                "-Iinclude",
+                "-I\"include\\logic\"",
+                "-I\"include\\logic\\effects\"",
+                "-I\"include\\logic\\items\"",
+                "-I\"include\\screen\"",
+                "-I\"include\\screen\\screen elements\"",
+                "-I\"include\\utilities\"",
+                "-o",
+                "BattleRoyale.exe",
+
+                "src\\Main.cpp",
+                "src\\Game.cpp",
+
+                "src\\utilities\\CharMatrix.cpp",
+
+                "src\\screen\\Screen.cpp",
+                "src\\screen\\screen elements\\ScreenElement.cpp",
+                "src\\screen\\screen elements\\MapScreenElement.cpp"  
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

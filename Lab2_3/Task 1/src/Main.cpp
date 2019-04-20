@@ -32,8 +32,6 @@ unique_ptr<Hero> inputHero(){
             return make_unique<Thanos>();
         cout << "\"" << hero << "\" hero dosn't exist\nTry again." << endl;
     }
-    
-    throw ;
 }
 
 void init(){
