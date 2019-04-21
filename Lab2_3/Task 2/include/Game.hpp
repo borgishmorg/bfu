@@ -1,6 +1,9 @@
 #ifndef __GAME__
 #define __GAME__
 
+#include <vector>
+#include <memory>
+
 #include "BattleRoyale.hpp"
 
 namespace BattleRoyale{
@@ -11,11 +14,10 @@ namespace BattleRoyale{
 
             void play();            
         private:
-            const unsigned int SCREEN_HEIGHT = 24;
-            const unsigned int SCREEN_WEIGHT = 80;
-
-            Screen screen;
-            MapScreenElement mapElement;
+            Map map_;
+            Screen screen_;
+            
+            std::vector<Player> players_;
     };
 }
 

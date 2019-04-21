@@ -2,20 +2,27 @@
 
 using BattleRoyale::Screen;
 
-Screen::Screen(unsigned int height, unsigned int weight):
-    height_(height), weight_(weight), data_(height, weight){};
+Screen::Screen(std::shared_ptr<Map> map):
+    mapElement_(map, 0, 0), height_(HEIGHT), weight_(WEIGHT), data_(HEIGHT, WEIGHT){}
 
 Screen::~Screen(){};
 
 
 
-void Screen::addElement(ScreenElement & element){
-    elements_.push_back(&element);
+void Screen::focusAtPlayer(std::shared_ptr<Player> player){
+    player_ = player;
+    mapElement_.focusAtPlayer(player);
 }
 
+void Screen::lookAtCell(std::shared_ptr<Cell> cell){
+    cell_ = cell;
+}
+
+
+
 void Screen::update(){
-    for(int i = 0; i < elements_.size(); ++i)
-        elements_.at(i)->draw(data_);
+    mapElement_.update();
+    mapElement_.draw(data_);
 }
 
 
@@ -23,3 +30,10 @@ void Screen::update(){
 void Screen::draw() const{
     std::cout << data_.toString();
 }
+
+
+
+const unsigned int Screen::HEIGHT = 24;
+const unsigned int Screen::WEIGHT = 80;
+const unsigned int Screen::MAP_ELEMENT_HPOS = 0;
+const unsigned int Screen::MAP_ELEMENT_WPOS = 0;

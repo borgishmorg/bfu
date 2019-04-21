@@ -1,37 +1,78 @@
 #include "MapScreenElement.hpp"
+#include <iostream>
 
 using BattleRoyale::MapScreenElement;
 
-MapScreenElement::MapScreenElement(unsigned int hPos, unsigned int wPos):
-    ScreenElement(hPos, wPos, 24, 24){
-        data_.fill(" +--------------------+ ", 0);
-        data_.fill("++                    ++", 1);
-        data_.fill("|   ABCDEFGHIJKLMNOPR  |", 2);
-        data_.fill("|  +-----------------+ |", 3);
-        data_.fill("| 0|                 | |", 4);
-        data_.fill("| 1|                 | |", 5);
-        data_.fill("| 2|                 | |", 6);
-        data_.fill("| 3|                 | |", 7);
-        data_.fill("| 4|                 | |", 8);
-        data_.fill("| 5|                 | |", 9);
-        data_.fill("| 6|                 | |", 10);
-        data_.fill("| 7|                 | |", 11);
-        data_.fill("| 8|                 | |", 12);
-        data_.fill("| 9|                 | |", 13);
-        data_.fill("|10|                 | |", 14);
-        data_.fill("|11|                 | |", 15);
-        data_.fill("|12|                 | |", 16);
-        data_.fill("|13|                 | |", 17);
-        data_.fill("|14|                 | |", 18);
-        data_.fill("|15|                 | |", 19);
-        data_.fill("|16|                 | |", 20);
-        data_.fill("|  +-----------------+ |", 21);
-        data_.fill("++                    ++", 22);
-        data_.fill(" +--------------------+ ", 23);
+MapScreenElement::MapScreenElement(std::shared_ptr<Map> map, unsigned int hPos, unsigned int wPos):
+    viewData_(VIEW_DATA_HEIGHT, VIEW_DATA_WEIGHT), map_(map), ScreenElement(hPos, wPos, HEIGHT, WEIGHT){
+        data_.fill(BACKGROUND_DATA);
     };
 
 MapScreenElement::~MapScreenElement(){};
 
-void MapScreenElement::update(){
 
+
+void MapScreenElement::focusAtPlayer(std::shared_ptr<Player> player){
+    player_ = player;
+    update();
 }
+void MapScreenElement::update(){
+    for(unsigned int i = 0; i < VIEW_DATA_HEIGHT; i++){
+        for(unsigned int j = 0; j < VIEW_DATA_WEIGHT; j++){
+            if(player_ == nullptr){
+                viewData_.at(i, j) = ' ';
+            }else if(i == VIEW_DATA_HEIGHT/2  && j == VIEW_DATA_WEIGHT/2){
+                viewData_.at(i, j) = 'P';
+            }else{
+                try{
+                    Cell & cell = map_->at(player_->getPos()->getHPos() + i - VIEW_DATA_HEIGHT/2,
+                                        player_->getPos()->getWPos() + j - VIEW_DATA_WEIGHT/2);
+                    
+                    if(cell.getPlayers().size() != 0)
+                        viewData_.at(i, j) = 'E';
+                    else if(cell.getItems().size() != 0)
+                        viewData_.at(i, j) = 'I';
+                    else
+                        viewData_.at(i, j) = Cell::charFromCellType(cell.getType());
+                }catch(...){
+                    viewData_.at(i, j) = ' ';
+                }  
+            }
+            
+        }
+    }
+    data_.fill(viewData_, VIEW_DATA_HPOS, VIEW_DATA_WPOS);
+}
+
+const std::string MapScreenElement::BACKGROUND_DATA = std::string()+
+            " +--------------------+ "+
+            "++                    ++"+
+            "|   ABCDEFGHIJKLMNOPR  |"+
+            "|  +-----------------+ |"+
+            "| 0|                 | |"+
+            "| 1|                 | |"+
+            "| 2|                 | |"+
+            "| 3|                 | |"+
+            "| 4|                 | |"+
+            "| 5|                 | |"+
+            "| 6|                 | |"+
+            "| 7|                 | |"+
+            "| 8|                 | |"+
+            "| 9|                 | |"+
+            "|10|                 | |"+
+            "|11|                 | |"+
+            "|12|                 | |"+
+            "|13|                 | |"+
+            "|14|                 | |"+
+            "|15|                 | |"+
+            "|16|                 | |"+
+            "|  +-----------------+ |"+
+            "++                    ++"+
+            " +--------------------+ ";
+
+const unsigned int MapScreenElement::HEIGHT = 24;
+const unsigned int MapScreenElement::WEIGHT = 24;
+const unsigned int MapScreenElement::VIEW_DATA_HEIGHT = 17;
+const unsigned int MapScreenElement::VIEW_DATA_WEIGHT = 17;
+const unsigned int MapScreenElement::VIEW_DATA_HPOS = 4;
+const unsigned int MapScreenElement::VIEW_DATA_WPOS = 4;
