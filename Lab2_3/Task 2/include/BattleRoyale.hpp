@@ -7,6 +7,7 @@
 //Logic includes
 #include "Effect.hpp"
 #include "Item.hpp"
+#include "Keyboard.hpp"
 #include "Cell.hpp"
 #include "Map.hpp"
 #include "Player.hpp"

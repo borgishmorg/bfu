@@ -22,6 +22,8 @@ namespace BattleRoyale{
             std::shared_ptr<Cell> getPos();
 
             void setPos(std::shared_ptr<Cell>);
+
+            const std::string toString() const;
         private:
             std::string name_;
             std::shared_ptr<Cell> pos_;

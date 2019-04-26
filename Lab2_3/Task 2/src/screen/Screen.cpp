@@ -2,32 +2,38 @@
 
 using BattleRoyale::Screen;
 
-Screen::Screen(std::shared_ptr<Map> map):
-    mapElement_(map, 0, 0), height_(HEIGHT), weight_(WEIGHT), data_(HEIGHT, WEIGHT){}
+Screen::Screen(Map & map):
+    mapElement_(map, 0, 0),
+    playerElement_(PLAYER_ELEMENT_HPOS, PLAYER_ELEMENT_WPOS),
+    messageElement_(MESSAGE_ELEMENT_HPOS, MESSAGE_ELEMENT_WPOS),
+    height_(HEIGHT), weight_(WEIGHT), data_(HEIGHT, WEIGHT){}
 
-Screen::~Screen(){};
+Screen::~Screen(){
+    player_ = nullptr;
+    cell_ = nullptr;
+};
 
 
 
 void Screen::focusAtPlayer(std::shared_ptr<Player> player){
     player_ = player;
     mapElement_.focusAtPlayer(player);
+    playerElement_.focusAtPlayer(player);
 }
-
-void Screen::lookAtCell(std::shared_ptr<Cell> cell){
-    cell_ = cell;
-}
-
-
 
 void Screen::update(){
     mapElement_.update();
     mapElement_.draw(data_);
+    playerElement_.update();
+    playerElement_.draw(data_);
+    messageElement_.update();
+    messageElement_.draw(data_);
 }
 
 
 
 void Screen::draw() const{
+    system("cls");
     std::cout << data_.toString();
 }
 
@@ -37,3 +43,7 @@ const unsigned int Screen::HEIGHT = 24;
 const unsigned int Screen::WEIGHT = 80;
 const unsigned int Screen::MAP_ELEMENT_HPOS = 0;
 const unsigned int Screen::MAP_ELEMENT_WPOS = 0;
+const unsigned int Screen::PLAYER_ELEMENT_HPOS = 0;
+const unsigned int Screen::PLAYER_ELEMENT_WPOS = 24;
+const unsigned int Screen::MESSAGE_ELEMENT_HPOS = 12;
+const unsigned int Screen::MESSAGE_ELEMENT_WPOS = 24;

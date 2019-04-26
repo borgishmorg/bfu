@@ -2,6 +2,7 @@
 #define __MAP__
 
 #include <vector>
+#include <memory>
 
 #include "Cell.hpp"
 
@@ -12,9 +13,9 @@ namespace BattleRoyale{
             Map();
             ~Map();
 
-            Cell & at(unsigned int hPos, unsigned int wPos);
+            std::shared_ptr<Cell> at(unsigned int hPos, unsigned int wPos);
         private:
-            std::vector<std::vector<Cell> > cells_;
+            std::vector< std::vector< std::shared_ptr<Cell> > > cells_;
 
             static const unsigned int HEIGHT;
             static const unsigned int WEIGHT;

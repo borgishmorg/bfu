@@ -12,7 +12,7 @@
 namespace BattleRoyale{
     class MapScreenElement: public ScreenElement{
         public:
-            MapScreenElement(std::shared_ptr<Map>, unsigned int hPos, unsigned int wPos);
+            MapScreenElement(Map & map, unsigned int hPos, unsigned int wPos);
             ~MapScreenElement();
 
             void focusAtPlayer(std::shared_ptr<Player>);
@@ -21,7 +21,7 @@ namespace BattleRoyale{
         private:
             CharMatrix viewData_;
 
-            std::shared_ptr<Map> map_;
+            Map & map_;
             std::shared_ptr<Player> player_;
             
             static const std::string BACKGROUND_DATA;

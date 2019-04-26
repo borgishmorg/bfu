@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "${workspaceFolder}/BattleRoyale.exe",
             "args": [],
-            "stopAtEntry": true,
+            "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": true,

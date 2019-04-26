@@ -3,12 +3,14 @@
 
 using BattleRoyale::MapScreenElement;
 
-MapScreenElement::MapScreenElement(std::shared_ptr<Map> map, unsigned int hPos, unsigned int wPos):
+MapScreenElement::MapScreenElement(Map & map, unsigned int hPos, unsigned int wPos):
     viewData_(VIEW_DATA_HEIGHT, VIEW_DATA_WEIGHT), map_(map), ScreenElement(hPos, wPos, HEIGHT, WEIGHT){
         data_.fill(BACKGROUND_DATA);
     };
 
-MapScreenElement::~MapScreenElement(){};
+MapScreenElement::~MapScreenElement(){
+    player_ = nullptr;
+};
 
 
 
@@ -25,7 +27,7 @@ void MapScreenElement::update(){
                 viewData_.at(i, j) = 'P';
             }else{
                 try{
-                    Cell & cell = map_->at(player_->getPos()->getHPos() + i - VIEW_DATA_HEIGHT/2,
+                    Cell & cell = *map_.at(player_->getPos()->getHPos() + i - VIEW_DATA_HEIGHT/2,
                                         player_->getPos()->getWPos() + j - VIEW_DATA_WEIGHT/2);
                     
                     if(cell.getPlayers().size() != 0)

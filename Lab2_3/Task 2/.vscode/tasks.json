@@ -25,12 +25,15 @@
                 "src\\logic\\Map.cpp",
                 "src\\logic\\Player.cpp",
                 "src\\logic\\items\\Item.cpp",
+                "src\\logic\\items\\Keyboard.cpp",
 
                 "src\\utilities\\CharMatrix.cpp",
 
                 "src\\screen\\Screen.cpp",
                 "src\\screen\\screen elements\\ScreenElement.cpp",
-                "src\\screen\\screen elements\\MapScreenElement.cpp"  
+                "src\\screen\\screen elements\\MapScreenElement.cpp",  
+                "src\\screen\\screen elements\\PlayerScreenElement.cpp",  
+                "src\\screen\\screen elements\\MessageScreenElement.cpp"  
             ],
             "problemMatcher": [
                 "$gcc"

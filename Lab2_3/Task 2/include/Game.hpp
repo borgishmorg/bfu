@@ -3,6 +3,8 @@
 
 #include <vector>
 #include <memory>
+#include <iostream>
+#include <string>
 
 #include "BattleRoyale.hpp"
 
@@ -17,7 +19,7 @@ namespace BattleRoyale{
             Map map_;
             Screen screen_;
             
-            std::vector<Player> players_;
+            std::vector<std::shared_ptr<Player> > players_;
     };
 }
 
