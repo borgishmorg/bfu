@@ -22,6 +22,10 @@ void Screen::showMessage(std::string message){
     messageElement_.showMessage(message);
 }
 
+void Screen::showData(const CharMatrix & data){
+    data_.clear();
+    data_.fill(data);
+}
 
 void Screen::update(){
     mapElement_.update();

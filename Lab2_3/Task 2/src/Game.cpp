@@ -38,6 +38,8 @@ void Game::play(){
         else if (command == "turn") turn();
         else if(command == "look") look();
         else if(command == "take") take();
+        else if(command == "heal") heal();
+        else if(command == "scoreboard" || command == "score") scoreboard();
         else if (command == "exit") return;
         else screen_.showMessage("\"" + command + "\" command doesn't exist\n");
     }
@@ -126,6 +128,28 @@ void Game::take(){
         screen_.showMessage(e);
     }
 }
+
+void Game::heal(){
+    try{
+        player_->heal();
+        screen_.showMessage(player_->getName() + " successfully healed\n");
+    }catch(std::string e){
+        screen_.showMessage(e);
+    }
+}
+
+void Game::scoreboard(){
+    CharMatrix data(screen_.HEIGHT, screen_.WEIGHT);
+    std::string score = "   \n";
+    data.fill("Scoreboard:", 2, 33);
+    for(int i = 0; i < players_.size(); i++){
+        data.fill(players_.at(i)->getName() + " " + players_.at(i)->getHPBar(), 4 + i, 30);
+    }
+    screen_.showData(data);
+    screen_.draw();
+    system("pause");
+}
+
 
 
 void Game::playersQueueInit(){

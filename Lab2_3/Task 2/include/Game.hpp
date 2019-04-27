@@ -21,6 +21,8 @@ namespace BattleRoyale{
             void turn();
             void look();
             void take();
+            void heal();
+            void scoreboard();
 
             void playersQueueInit();
 

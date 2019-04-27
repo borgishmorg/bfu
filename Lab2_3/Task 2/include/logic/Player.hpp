@@ -19,6 +19,7 @@ namespace BattleRoyale{
             ~Player();
 
             void turn();
+            void heal();
 
             const std::string & getName() const;
             int getIP() const;

@@ -24,6 +24,16 @@ void Player::turn(){
     AP_ = maxAP_;
 }
 
+void Player::heal(){
+    if(!isActive()){
+        throw name_ + " can't heal now!\n";
+    }else if(HP_ >= maxHP_){
+        throw name_ + " already have max health!\n";
+    }else{
+        addHP(5);
+        addAP(-1);
+    }
+}
 
 
 const std::string & Player::getName() const{
