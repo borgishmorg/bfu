@@ -33,10 +33,11 @@ namespace BattleRoyale{
             void addAP(int delta);
             void addHP(int delta);
             void addCP(int delta);
+            void addItem(std::shared_ptr<Item> item);
 
             const std::string toString() const;
             bool isDead() const;
-            bool isMovable() const;
+            bool isActive() const;
         private:
             std::string name_;
             std::shared_ptr<Cell> pos_;

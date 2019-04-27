@@ -11,6 +11,11 @@ Game::Game(const unsigned int NUMBER_OF_PLAYERS):
         }
             
         map_.at(2, 3)->addItem(std::make_shared<Keyboard>());
+        map_.at(2, 3)->addItem(std::make_shared<Keyboard>());
+        map_.at(2, 3)->addItem(std::make_shared<Keyboard>());
+        map_.at(1, 2)->addItem(std::make_shared<Keyboard>());
+        map_.at(1, 2)->addItem(std::make_shared<Keyboard>());
+        map_.at(1, 2)->addItem(std::make_shared<Keyboard>());
 
         turn();
     }
@@ -32,6 +37,7 @@ void Game::play(){
         if (command == "move") move();
         else if (command == "turn") turn();
         else if(command == "look") look();
+        else if(command == "take") take();
         else if (command == "exit") return;
         else screen_.showMessage("\"" + command + "\" command doesn't exist\n");
     }
@@ -53,7 +59,7 @@ void Game::move(){
 
     std::shared_ptr<Cell> newCell = map_.at(player_->getPos()->getHPos() + di, 
                                             player_->getPos()->getWPos() + dj);
-    if(!player_->isMovable()){
+    if(!player_->isActive()){
         screen_.showMessage("You can't go now!");
     }else if(newCell->getType() == GRASS){
         player_->getPos()->removePlayer(player_);
@@ -62,7 +68,7 @@ void Game::move(){
         player_->addAP(-1);
 
         std::string message = "Your lacation:\n";
-        message += map_.at(player_->getPos()->getHPos(), player_->getPos()->getWPos())->toString();
+        message += player_->getPos()->toString();
         screen_.showMessage(message);
     }else{
         screen_.showMessage("You can't go there!");
@@ -94,6 +100,33 @@ void Game::look(){
     }
     screen_.showMessage(message);
 }
+
+void Game::take(){
+    int n;
+    std::shared_ptr<Item> item;
+    std::cin >> n;
+    n--;
+    
+    try{
+        item = player_->getPos()->getItems().at(n);
+    }catch(...){
+        screen_.showMessage("I can't find this item!\n");
+        return;
+    }
+
+    try{
+        player_->addItem(item);
+        player_->addAP(-1);
+        player_->getPos()->removeItem(item);
+
+        std::string message = "Your lacation:\n";
+        message += player_->getPos()->toString();
+        screen_.showMessage(message);
+    }catch(std::string e){
+        screen_.showMessage(e);
+    }
+}
+
 
 void Game::playersQueueInit(){
     playersQueue_.clear();

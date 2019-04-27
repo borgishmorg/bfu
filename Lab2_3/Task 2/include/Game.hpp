@@ -20,6 +20,7 @@ namespace BattleRoyale{
             void move();
             void turn();
             void look();
+            void take();
 
             void playersQueueInit();
 

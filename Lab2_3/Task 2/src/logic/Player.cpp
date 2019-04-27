@@ -76,6 +76,18 @@ void Player::addCP(int delta){
     CP_ = std::min(maxCP_, CP_ + delta);
 }
 
+void Player::addItem(std::shared_ptr<Item> item){
+    if(!isActive()){
+        throw getName() + " can't take " + item->getName() + " now \n";
+    }else if(CP_ >= maxCP_){
+        throw getName() + " haven't empty slot\n";
+    }else{
+        CP_++;
+        items_.push_back(item);
+    }
+}
+
+
 
 const std::string Player::toString() const{
     std::string res;
@@ -93,7 +105,7 @@ bool Player::isDead() const{
     return dead_;
 }
 
-bool Player::isMovable() const{
+bool Player::isActive() const{
     return HP_ > 0 && AP_ > 0;
 }
 
