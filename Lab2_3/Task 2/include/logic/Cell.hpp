@@ -10,6 +10,7 @@ namespace BattleRoyale{
 
 #include "Item.hpp"
 #include "Player.hpp"
+#include "CharMatrix.hpp"
 
 namespace BattleRoyale{
     

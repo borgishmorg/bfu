@@ -4,6 +4,7 @@ using BattleRoyale::Player;
 using BattleRoyale::Item;
 using BattleRoyale::Cell;
 using BattleRoyale::CellType;
+using BattleRoyale::CharMatrix;
 
 
 Cell::Cell(CellType type, unsigned int hPos, unsigned int wPos):
@@ -43,17 +44,29 @@ std::vector<std::shared_ptr<Item> > & Cell::getItems(){
 
 
 std::string Cell::toString() const{
+    CharMatrix data(7, 52);
+    CharMatrix playersData(6, 26);
+    CharMatrix itemsData(6, 26);
+
     std::string res;
-    res = "Type: " + stringFromCellType(type_) + 
-          "\nPlayers:\n";
+    res = "Type: " + stringFromCellType(type_);
+    data.fill(res);
+
+    res = "Players:\n";
     for(unsigned int i = 0; i < players_.size(); i++){
         res += " " + std::to_string(i+1) + ": " + players_.at(i)->getName() + " " + players_.at(i)->getHPBar() + "\n";
     }
-    res += "Items:\n";
+    playersData.fill(res);
+
+    res = "Items:\n";
     for(unsigned int i = 0; i < items_.size(); i++){
         res += " " + std::to_string(i+1) + ": " + items_.at(i)->getName() + "\n";
     }
-    return res;
+    
+    itemsData.fill(res);
+    data.fill(playersData, 1, 0);
+    data.fill(itemsData, 1, 26);
+    return data.toString();
 }
 
 

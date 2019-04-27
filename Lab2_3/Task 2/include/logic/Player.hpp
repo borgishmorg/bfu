@@ -18,13 +18,25 @@ namespace BattleRoyale{
             Player(std::string, std::shared_ptr<Cell>);
             ~Player();
 
+            void turn();
+
             const std::string & getName() const;
+            int getIP() const;
+            int getAP() const;
+            int getHP() const;
+            int getCP() const;
             const std::string  getHPBar() const;
             std::shared_ptr<Cell> getPos();
 
             void setPos(std::shared_ptr<Cell>);
+            void addIP(int delta);
+            void addAP(int delta);
+            void addHP(int delta);
+            void addCP(int delta);
 
             const std::string toString() const;
+            bool isDead() const;
+            bool isMovable() const;
         private:
             std::string name_;
             std::shared_ptr<Cell> pos_;
@@ -38,6 +50,8 @@ namespace BattleRoyale{
             int AP_; //action points
             int HP_; //health points
             int CP_; //capacity points
+
+            bool dead_;
 
             std::vector<std::shared_ptr<Item> > items_;
             

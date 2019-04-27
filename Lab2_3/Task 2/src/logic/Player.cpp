@@ -8,7 +8,8 @@ using BattleRoyale::Cell;
 Player::Player(std::string name, std::shared_ptr<Cell> pos):
     name_(name), pos_(pos),
     maxAP_(INITIAL_AP), maxCP_(INITIAL_CP), maxHP_(INITIAL_HP), maxIP_(INITIAL_IP),
-    AP_(INITIAL_AP), CP_(0), HP_(INITIAL_HP), IP_(INITIAL_IP){}
+    AP_(INITIAL_AP), CP_(0), HP_(INITIAL_HP), IP_(INITIAL_IP), 
+    dead_(false){}
 
 Player::~Player(){
     pos_ = nullptr;
@@ -19,9 +20,30 @@ Player::~Player(){
 
 
 
+void Player::turn(){
+    AP_ = maxAP_;
+}
+
+
 
 const std::string & Player::getName() const{
     return name_;
+}
+
+int Player::getIP() const{
+    return IP_;
+}
+
+int Player::getAP() const{
+    return AP_;
+}
+
+int Player::getHP() const{
+    return HP_;
+}
+
+int Player::getCP() const{
+    return CP_;
 }
 
 const std::string Player::getHPBar() const{
@@ -38,6 +60,21 @@ void Player::setPos(std::shared_ptr<Cell> pos){
     pos_ = pos;
 }
 
+void Player::addIP(int delta){
+    IP_ = std::min(maxIP_, IP_ + delta);
+}
+
+void Player::addAP(int delta){
+    AP_ = std::min(maxAP_, AP_ + delta);
+}
+
+void Player::addHP(int delta){
+    HP_ = std::min(maxHP_, HP_ + delta);
+}
+
+void Player::addCP(int delta){
+    CP_ = std::min(maxCP_, CP_ + delta);
+}
 
 
 const std::string Player::toString() const{
@@ -51,6 +88,15 @@ const std::string Player::toString() const{
     }
     return res;
 }
+
+bool Player::isDead() const{
+    return dead_;
+}
+
+bool Player::isMovable() const{
+    return HP_ > 0 && AP_ > 0;
+}
+
 
 const int Player::INITIAL_IP = 0;
 const int Player::INITIAL_AP = 3;

@@ -25,5 +25,5 @@ std::shared_ptr<Cell> Map::at(unsigned int hPos, unsigned int wPos){
     return cells_.at(hPos).at(wPos);
 }
 
-const unsigned int Map::HEIGHT = 100;
-const unsigned int Map::WEIGHT = 100;
+const unsigned int Map::HEIGHT = 25;
+const unsigned int Map::WEIGHT = 25;
