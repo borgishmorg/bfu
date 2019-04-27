@@ -19,6 +19,7 @@ namespace BattleRoyale{
             ~Player();
 
             const std::string & getName() const;
+            const std::string  getHPBar() const;
             std::shared_ptr<Cell> getPos();
 
             void setPos(std::shared_ptr<Cell>);

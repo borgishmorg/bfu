@@ -9,9 +9,14 @@ MessageScreenElement::MessageScreenElement(unsigned int hPos, unsigned int wPos)
 
 MessageScreenElement::~MessageScreenElement(){};
 
-void MessageScreenElement::update(){
+
+void MessageScreenElement::showMessage(std::string message){
     viewData_.clear();
-    // write message screen element realization here !!!
+    viewData_.fill(message);
+}
+
+
+void MessageScreenElement::update(){
     data_.fill(viewData_, VIEW_DATA_HPOS, VIEW_DATA_WPOS);
 }
 

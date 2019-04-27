@@ -42,6 +42,22 @@ std::vector<std::shared_ptr<Item> > & Cell::getItems(){
 
 
 
+std::string Cell::toString() const{
+    std::string res;
+    res = "Type: " + stringFromCellType(type_) + 
+          "\nPlayers:\n";
+    for(unsigned int i = 0; i < players_.size(); i++){
+        res += " " + std::to_string(i+1) + ": " + players_.at(i)->getName() + " " + players_.at(i)->getHPBar() + "\n";
+    }
+    res += "Items:\n";
+    for(unsigned int i = 0; i < items_.size(); i++){
+        res += " " + std::to_string(i+1) + ": " + items_.at(i)->getName() + "\n";
+    }
+    return res;
+}
+
+
+
 void Cell::setType(CellType type){
     type_ = type;
 }
@@ -84,5 +100,17 @@ char Cell::charFromCellType(CellType type){
             return '#';
         default:
             return ' ';
+    }
+}
+
+std::string Cell::stringFromCellType(CellType type){
+    switch (type)
+    {
+        case GRASS:
+            return "Grass";
+        case WALL:
+            return "Wall";
+        default:
+            return "Unknown";
     }
 }

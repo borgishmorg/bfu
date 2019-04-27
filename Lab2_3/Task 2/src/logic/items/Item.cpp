@@ -7,6 +7,12 @@ Item::Item(std::string name, unsigned int durability):
 
 Item::~Item(){}
 
+
+
+const std::string & Item::getName() const{
+    return name_;
+}
+
 bool Item::isBroken() const{
     return durability_ > 0;
 }

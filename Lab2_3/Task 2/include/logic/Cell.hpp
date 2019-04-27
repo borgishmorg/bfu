@@ -27,6 +27,8 @@ namespace BattleRoyale{
             std::vector<std::shared_ptr<Player> > & getPlayers();
             std::vector<std::shared_ptr<Item> > & getItems();
 
+            std::string toString() const;
+
             void setType(CellType);
             void addPlayer(std::shared_ptr<Player>);
             void addItem(std::shared_ptr<Item>);
@@ -35,6 +37,7 @@ namespace BattleRoyale{
             void removeItem(std::shared_ptr<Item>);
 
             static char charFromCellType(CellType);
+            static std::string stringFromCellType(CellType);
         private:
             CellType type_;
             unsigned int hPos_;

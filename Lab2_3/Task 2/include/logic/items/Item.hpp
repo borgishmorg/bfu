@@ -19,6 +19,7 @@ namespace BattleRoyale{
             virtual void use(Cell & destination) = 0;
             virtual const std::string toString() const = 0;
 
+            const std::string & getName() const;
             bool isBroken() const;
         protected:
             std::string name_;

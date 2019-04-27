@@ -9,17 +9,19 @@ Screen::Screen(Map & map):
     height_(HEIGHT), weight_(WEIGHT), data_(HEIGHT, WEIGHT){}
 
 Screen::~Screen(){
-    player_ = nullptr;
-    cell_ = nullptr;
 };
 
 
 
 void Screen::focusAtPlayer(std::shared_ptr<Player> player){
-    player_ = player;
     mapElement_.focusAtPlayer(player);
     playerElement_.focusAtPlayer(player);
 }
+
+void Screen::showMessage(std::string message){
+    messageElement_.showMessage(message);
+}
+
 
 void Screen::update(){
     mapElement_.update();

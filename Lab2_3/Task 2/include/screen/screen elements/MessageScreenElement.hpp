@@ -14,6 +14,8 @@ namespace BattleRoyale{
             MessageScreenElement(unsigned int hPos, unsigned int wPos);
             ~MessageScreenElement();
 
+            void showMessage(std::string message);
+
             virtual void update() override;
         private:
             CharMatrix viewData_;

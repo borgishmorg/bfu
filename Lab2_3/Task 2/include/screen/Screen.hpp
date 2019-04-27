@@ -19,7 +19,7 @@ namespace BattleRoyale{
             ~Screen();
 
             void focusAtPlayer(std::shared_ptr<Player>);
-            void lookAtCell(std::shared_ptr<Cell>);
+            void showMessage(std::string message);
 
             void update();
             
@@ -32,9 +32,6 @@ namespace BattleRoyale{
             unsigned int height_;
             unsigned int weight_;
             CharMatrix data_;
-
-            std::shared_ptr<Player> player_;
-            std::shared_ptr<Cell> cell_;
 
             static const unsigned int HEIGHT;
             static const unsigned int WEIGHT;

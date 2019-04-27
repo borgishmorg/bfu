@@ -24,6 +24,10 @@ const std::string & Player::getName() const{
     return name_;
 }
 
+const std::string Player::getHPBar() const{
+    return "(" + std::to_string(HP_) + "/" + std::to_string(maxHP_) + ")";
+}
+
 std::shared_ptr<Cell> Player::getPos(){
     return pos_;
 }

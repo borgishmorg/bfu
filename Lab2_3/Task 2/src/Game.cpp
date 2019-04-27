@@ -53,8 +53,24 @@ void Game::play(){
             screen_.focusAtPlayer(players_.at(playerId));
             continue;
         }
+        if(command == "look"){
+            char w;
+            int h;
+            std::cin >> w >> h;
+            int di = h - 8;
+            int dj = w - 'I';
+            std::string message = std::string() + "You look at " + w + std::to_string(h) + ":\n";
+            try{
+                message += map_.at(players_.at(playerId)->getPos()->getHPos() + di, players_.at(playerId)->getPos()->getWPos() + dj)->toString();
+            }catch(...){
+                message += "Unknown\n";
+            }
+            screen_.showMessage(message);
+            continue;
+        }
         if (command == "exit"){
             return;
         }
+        screen_.showMessage("\"" + command + "\" command doesn't exist\n");
     }
 }
