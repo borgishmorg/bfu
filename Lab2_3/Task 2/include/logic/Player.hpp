@@ -4,6 +4,7 @@
 #include <memory>
 #include <vector>
 #include <string>
+#include <cstdlib>
 
 namespace BattleRoyale{
     class Player;
@@ -36,17 +37,23 @@ namespace BattleRoyale{
             int getScore() const;
             const Stats & getStats() const;
             const Stats & getMaxStats() const;
+            int getUpgradePoints() const;
             std::shared_ptr<Cell> getPos();
+            std::shared_ptr<Item> getItem(int n);
 
             std::shared_ptr<Item> throwItem(int n);
+            void removeItem(int n);
             void die();
+            void upgrade(int n);
 
+            void setName(std::string);
             void setPos(std::shared_ptr<Cell>);
             void addScore(int delta);
             void addIP(int delta);
             void addAP(int delta);
             void addHP(int delta);
             void addCP(int delta);
+            void addUpgradePoints(int delta);
             void addItem(std::shared_ptr<Item> item);
 
             const std::string toString() const;
@@ -61,6 +68,7 @@ namespace BattleRoyale{
             Stats maxStats_;
             
             int score_;
+            int upgradePoints_;
 
             bool dead_;
 

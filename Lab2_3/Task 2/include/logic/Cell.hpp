@@ -13,15 +13,14 @@ namespace BattleRoyale{
 #include "CharMatrix.hpp"
 
 namespace BattleRoyale{
-    
-    enum CellType{GRASS, WALL};
-    
     class Cell{
         public:
-            Cell(CellType, unsigned int hPos, unsigned int wPos);
+            enum Type{GRASS, WALL};
+
+            Cell(Type, unsigned int hPos, unsigned int wPos);
             ~Cell();
 
-            CellType getType() const;
+            Type getType() const;
             unsigned int getHPos() const;
             unsigned int getWPos() const;
 
@@ -30,7 +29,7 @@ namespace BattleRoyale{
 
             std::string toString() const;
 
-            void setType(CellType);
+            void setType(Type);
             void addPlayer(std::shared_ptr<Player>);
             void addItem(std::shared_ptr<Item>);
 
@@ -38,17 +37,15 @@ namespace BattleRoyale{
             void removePlayer(Player *);
             void removeItem(std::shared_ptr<Item>);
 
-            static char charFromCellType(CellType);
-            static std::string stringFromCellType(CellType);
+            static char charFromCellType(Type);
+            static std::string stringFromCellType(Type);
         private:
-            CellType type_;
+            Type type_;
             unsigned int hPos_;
             unsigned int wPos_;
             
             std::vector<std::shared_ptr<Player> > players_;
             std::vector<std::shared_ptr<Item> > items_;
-
-
     };
 }
 

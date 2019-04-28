@@ -2,15 +2,15 @@
 
 using BattleRoyale::Item;
 
-Item::Stats::Stats(unsigned int durability):
-    durability_(durability){}
+Item::Stats::Stats(unsigned int durability, unsigned int cost):
+    durability_(durability), cost_(cost){}
 
 Item::Stats::~Stats(){}
 
 
 
-Item::Item(std::string name, unsigned int durability):
-    name_(name), stats_(durability), maxStats_(durability){}
+Item::Item(std::string name, unsigned int durability, unsigned int cost):
+    name_(name), stats_(durability, cost), maxStats_(durability, cost){}
 
 Item::~Item(){}
 
@@ -23,5 +23,5 @@ const std::string & Item::getName() const{
 }
 
 bool Item::isBroken() const{
-    return stats_.durability_ > 0;
+    return stats_.durability_ <= 0;
 }

@@ -2,7 +2,6 @@
 
 using BattleRoyale::Map;
 using BattleRoyale::Cell;
-using BattleRoyale::CellType;
 
 Map::Map(){
     cells_.resize(HEIGHT);
@@ -11,9 +10,9 @@ Map::Map(){
         for (unsigned int j = 0; j < WEIGHT; j++)
             if(i != 0 && i != HEIGHT - 1 &&
                j != 0 && j != WEIGHT - 1)
-                cells_.at(i).push_back(std::make_shared<Cell>(GRASS, i, j));
+                cells_.at(i).push_back(std::make_shared<Cell>(Cell::Type::GRASS, i, j));
             else
-                cells_.at(i).push_back(std::make_shared<Cell>(WALL, i, j));
+                cells_.at(i).push_back(std::make_shared<Cell>(Cell::Type::WALL, i, j));
     }
 }
 
@@ -31,7 +30,7 @@ std::shared_ptr<Cell> Map::atRandomPos(){
     do{
         h = rand()%HEIGHT;
         w = rand()%WEIGHT;
-    }while (at(h, w)->getType() != GRASS ||
+    }while (at(h, w)->getType() != Cell::Type::GRASS ||
             at(h, w)->getPlayers().size() != 0 ||
             at(h, w)->getItems().size() != 0);
     return at(h, w);

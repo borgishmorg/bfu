@@ -3,11 +3,10 @@
 using BattleRoyale::Player;
 using BattleRoyale::Item;
 using BattleRoyale::Cell;
-using BattleRoyale::CellType;
 using BattleRoyale::CharMatrix;
 
 
-Cell::Cell(CellType type, unsigned int hPos, unsigned int wPos):
+Cell::Cell(Type type, unsigned int hPos, unsigned int wPos):
     type_(type), hPos_(hPos), wPos_(wPos){}
 
 Cell::~Cell(){
@@ -21,7 +20,7 @@ Cell::~Cell(){
 
 
 
-CellType Cell::getType() const{
+Cell::Type Cell::getType() const{
     return type_;
 }
 
@@ -71,8 +70,13 @@ std::string Cell::toString() const{
 
 
 
-void Cell::setType(CellType type){
+void Cell::setType(Type type){
     type_ = type;
+    if(type == WALL){
+        for(auto player: players_){
+            player->die();
+        }
+    }
 }
 
 void Cell::addPlayer(std::shared_ptr<Player> player){
@@ -112,7 +116,7 @@ void Cell::removeItem(std::shared_ptr<Item> item){
     }
 }
 
-char Cell::charFromCellType(CellType type){
+char Cell::charFromCellType(Type type){
     switch (type)
     {
         case GRASS:
@@ -124,7 +128,7 @@ char Cell::charFromCellType(CellType type){
     }
 }
 
-std::string Cell::stringFromCellType(CellType type){
+std::string Cell::stringFromCellType(Type type){
     switch (type)
     {
         case GRASS:

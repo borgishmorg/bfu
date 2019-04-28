@@ -14,6 +14,7 @@
 
 //Screen includes
 #include "Screen.hpp"
+#include "GameScreen.hpp"
 #include "ScreenElement.hpp"
 #include "MapScreenElement.hpp"
 #include "MessageScreenElement.hpp"

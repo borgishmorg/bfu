@@ -14,7 +14,7 @@ namespace BattleRoyale{
             ~ScreenElement();
 
             virtual void update() = 0;
-            virtual void draw(CharMatrix &) const;
+            virtual void draw(CharMatrix &);
         protected:
             unsigned int hPos_;
             unsigned int wPos_;

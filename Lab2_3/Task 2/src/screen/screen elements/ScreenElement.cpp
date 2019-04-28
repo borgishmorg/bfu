@@ -7,6 +7,7 @@ ScreenElement::ScreenElement(unsigned int hPos, unsigned int wPos, unsigned int 
 
 ScreenElement::~ScreenElement(){}
 
-void ScreenElement::draw(CharMatrix & matrix) const{
+void ScreenElement::draw(CharMatrix & matrix){
+    update();
     matrix.fill(data_, hPos_, wPos_);
 }

@@ -24,6 +24,8 @@ namespace BattleRoyale{
             void take();
             void drop();
             void heal();
+            void use();
+            void upgrade();
             void suicide();
             void scoreboard();
             void end();
@@ -33,7 +35,7 @@ namespace BattleRoyale{
             const unsigned int NUMBER_OF_PLAYERS_;
             bool gameContinue;
             Map map_;
-            Screen screen_;
+            GameScreen screen_;
             std::shared_ptr<Player> player_;
             std::vector<std::shared_ptr<Player> > players_;
             std::multiset<std::shared_ptr<Player>, bool (*)(std::shared_ptr<Player>, std::shared_ptr<Player>) > playersQueue_;

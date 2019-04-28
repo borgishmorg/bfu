@@ -30,6 +30,7 @@
                 "src\\utilities\\CharMatrix.cpp",
 
                 "src\\screen\\Screen.cpp",
+                "src\\screen\\GameScreen.cpp",
                 "src\\screen\\screen elements\\ScreenElement.cpp",
                 "src\\screen\\screen elements\\MapScreenElement.cpp",  
                 "src\\screen\\screen elements\\PlayerScreenElement.cpp",  
