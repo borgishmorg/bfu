@@ -5,6 +5,7 @@
 #include <memory>
 #include <set>
 #include <iostream>
+#include <cstdlib>
 #include <string>
 
 #include "BattleRoyale.hpp"
@@ -21,12 +22,16 @@ namespace BattleRoyale{
             void turn();
             void look();
             void take();
+            void drop();
             void heal();
+            void suicide();
             void scoreboard();
+            void end();
 
             void playersQueueInit();
 
             const unsigned int NUMBER_OF_PLAYERS_;
+            bool gameContinue;
             Map map_;
             Screen screen_;
             std::shared_ptr<Player> player_;

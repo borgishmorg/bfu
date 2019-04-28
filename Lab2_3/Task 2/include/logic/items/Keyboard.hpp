@@ -8,7 +8,7 @@ namespace BattleRoyale{
         public:
             Keyboard();
             ~Keyboard();
-            virtual void use(Cell & destination) override;
+            virtual void use() override;
             virtual const std::string toString() const override;
     };
     

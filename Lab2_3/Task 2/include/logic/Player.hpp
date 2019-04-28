@@ -10,11 +10,22 @@ namespace BattleRoyale{
 }
 
 #include "Cell.hpp"
+#include "Item.hpp"
 
 namespace BattleRoyale{
 
     class Player{
         public:
+            struct Stats{
+                int IP_; //initiative points
+                int AP_; //action points
+                int HP_; //health points
+                int CP_; //capacity points
+
+                Stats(int IP, int AP, int HP, int CP);
+                ~Stats();
+            };
+
             Player(std::string, std::shared_ptr<Cell>);
             ~Player();
 
@@ -22,14 +33,16 @@ namespace BattleRoyale{
             void heal();
 
             const std::string & getName() const;
-            int getIP() const;
-            int getAP() const;
-            int getHP() const;
-            int getCP() const;
-            const std::string  getHPBar() const;
+            int getScore() const;
+            const Stats & getStats() const;
+            const Stats & getMaxStats() const;
             std::shared_ptr<Cell> getPos();
 
+            std::shared_ptr<Item> throwItem(int n);
+            void die();
+
             void setPos(std::shared_ptr<Cell>);
+            void addScore(int delta);
             void addIP(int delta);
             void addAP(int delta);
             void addHP(int delta);
@@ -37,21 +50,17 @@ namespace BattleRoyale{
             void addItem(std::shared_ptr<Item> item);
 
             const std::string toString() const;
+            const std::string toShortString() const;
             bool isDead() const;
             bool isActive() const;
         private:
             std::string name_;
             std::shared_ptr<Cell> pos_;
-
-            int maxIP_; //initiative points
-            int maxAP_; //action points
-            int maxHP_; //health points
-            int maxCP_; //capacity points
             
-            int IP_; //initiative points
-            int AP_; //action points
-            int HP_; //health points
-            int CP_; //capacity points
+            Stats stats_;
+            Stats maxStats_;
+            
+            int score_;
 
             bool dead_;
 

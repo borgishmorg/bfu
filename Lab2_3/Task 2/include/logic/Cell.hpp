@@ -35,6 +35,7 @@ namespace BattleRoyale{
             void addItem(std::shared_ptr<Item>);
 
             void removePlayer(std::shared_ptr<Player>);
+            void removePlayer(Player *);
             void removeItem(std::shared_ptr<Item>);
 
             static char charFromCellType(CellType);

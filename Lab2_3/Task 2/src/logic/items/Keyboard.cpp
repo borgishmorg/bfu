@@ -7,10 +7,10 @@ Keyboard::Keyboard():
 
 Keyboard::~Keyboard(){};
 
-void Keyboard::use(Cell & destination){
+void Keyboard::use(){
 
 }
 
 const std::string Keyboard::toString() const{
-    return name_ + "(" + std::to_string(durability_) + ")";
+    return toShortString();
 }

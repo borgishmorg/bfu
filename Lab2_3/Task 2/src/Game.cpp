@@ -3,19 +3,21 @@
 using namespace BattleRoyale;
 
 Game::Game(const unsigned int NUMBER_OF_PLAYERS):
-    NUMBER_OF_PLAYERS_(NUMBER_OF_PLAYERS), map_(), screen_(map_), 
-    playersQueue_([](std::shared_ptr<Player> a, std::shared_ptr<Player> b){ return a->getIP() > b->getIP(); }){
+    NUMBER_OF_PLAYERS_(NUMBER_OF_PLAYERS), gameContinue(NUMBER_OF_PLAYERS > 0),
+    map_(), screen_(map_), 
+    playersQueue_([](std::shared_ptr<Player> a, std::shared_ptr<Player> b){ return a->getStats().IP_ > b->getStats().IP_; }){
+        
         for (unsigned int i = 0; i < NUMBER_OF_PLAYERS_; i++){
-            players_.push_back(std::make_shared<Player>("Player " + std::to_string(i+1), map_.at(2*i+1, 2*i+1)));
-            map_.at(2*i+1, 2*i+1)->addPlayer(players_.at(i));
+            players_.push_back(std::make_shared<Player>("Player " + std::to_string(i+1), map_.atRandomPos()));
+            players_.back()->getPos()->addPlayer(players_.at(i));
         }
             
-        map_.at(2, 3)->addItem(std::make_shared<Keyboard>());
-        map_.at(2, 3)->addItem(std::make_shared<Keyboard>());
-        map_.at(2, 3)->addItem(std::make_shared<Keyboard>());
-        map_.at(1, 2)->addItem(std::make_shared<Keyboard>());
-        map_.at(1, 2)->addItem(std::make_shared<Keyboard>());
-        map_.at(1, 2)->addItem(std::make_shared<Keyboard>());
+        map_.atRandomPos()->addItem(std::make_shared<Keyboard>());
+        map_.atRandomPos()->addItem(std::make_shared<Keyboard>());
+        map_.atRandomPos()->addItem(std::make_shared<Keyboard>());
+        map_.atRandomPos()->addItem(std::make_shared<Keyboard>());
+        map_.atRandomPos()->addItem(std::make_shared<Keyboard>());
+        map_.atRandomPos()->addItem(std::make_shared<Keyboard>());
 
         turn();
     }
@@ -28,7 +30,7 @@ void Game::play(){
     std::string command;
     screen_.focusAtPlayer(player_);
     
-    while (1){
+    while (gameContinue){
         screen_.update();
         screen_.draw();
 
@@ -38,7 +40,9 @@ void Game::play(){
         else if (command == "turn") turn();
         else if(command == "look") look();
         else if(command == "take") take();
+        else if(command == "drop") drop();
         else if(command == "heal") heal();
+        else if(command == "suicide") suicide();
         else if(command == "scoreboard" || command == "score") scoreboard();
         else if (command == "exit") return;
         else screen_.showMessage("\"" + command + "\" command doesn't exist\n");
@@ -81,11 +85,15 @@ void Game::move(){
 void Game::turn(){
     if (playersQueue_.empty()){
         playersQueueInit();
+        if(playersQueue_.empty()){
+            end();
+            return;
+        }
     }
     player_ = *playersQueue_.begin();
     playersQueue_.erase(playersQueue_.begin());
     screen_.focusAtPlayer(player_);
-    screen_.showMessage("\"" + player_->getName() + "\" turn\n");
+    screen_.showMessage(player_->getName() + " turn\n");
 }
 
 void Game::look(){
@@ -129,6 +137,18 @@ void Game::take(){
     }
 }
 
+void Game::drop(){
+    int n;
+    std::cin >> n;
+    try{
+        std::shared_ptr<Item> item = player_->throwItem(n-1);
+        player_->getPos()->addItem(item);
+        screen_.showMessage(player_->getName() + " has dropped the " + item->getName());
+    }catch(std::string e){
+        screen_.showMessage(e);
+    }
+}
+
 void Game::heal(){
     try{
         player_->heal();
@@ -138,13 +158,31 @@ void Game::heal(){
     }
 }
 
+void Game::suicide(){
+    player_->die();
+    screen_.showMessage(player_->getName() + " successfully suicide");
+    screen_.update();
+    screen_.draw();
+    system("pause");
+    turn();
+}
+
 void Game::scoreboard(){
-    CharMatrix data(screen_.HEIGHT, screen_.WEIGHT);
+    CharMatrix data(screen_.getHeight(), screen_.getWeight());
     std::string score = "   \n";
     data.fill("Scoreboard:", 2, 33);
     for(int i = 0; i < players_.size(); i++){
-        data.fill(players_.at(i)->getName() + " " + players_.at(i)->getHPBar(), 4 + i, 30);
+        data.fill(players_.at(i)->toShortString() + " - " + std::to_string(players_.at(i)->getScore()), 4 + i, 27);
     }
+    screen_.showData(data);
+    screen_.draw();
+    system("pause");
+}
+
+void Game::end(){
+    gameContinue = false;
+    CharMatrix data(screen_.getHeight(), screen_.getWeight());
+    data.fill("End!", 11, 38);
     screen_.showData(data);
     screen_.draw();
     system("pause");
@@ -155,7 +193,11 @@ void Game::scoreboard(){
 void Game::playersQueueInit(){
     playersQueue_.clear();
     for(auto player: players_){
-        player->turn();
-        playersQueue_.insert(player);
+        if (!player->isDead())
+        {
+            player->addScore(1);
+            player->turn();
+            playersQueue_.insert(player);
+        }
     }       
 }

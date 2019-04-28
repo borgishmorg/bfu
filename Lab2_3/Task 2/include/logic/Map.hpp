@@ -3,6 +3,11 @@
 
 #include <vector>
 #include <memory>
+#include <cstdlib>
+
+namespace BattleRoyale{
+    class Map;
+}
 
 #include "Cell.hpp"
 
@@ -14,6 +19,7 @@ namespace BattleRoyale{
             ~Map();
 
             std::shared_ptr<Cell> at(unsigned int hPos, unsigned int wPos);
+            std::shared_ptr<Cell> atRandomPos();
         private:
             std::vector< std::vector< std::shared_ptr<Cell> > > cells_;
 

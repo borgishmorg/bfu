@@ -45,6 +45,14 @@ void Screen::draw() const{
 
 
 
+unsigned int Screen::getHeight() const{
+    return height_;
+}
+
+unsigned int Screen::getWeight() const{
+    return weight_;
+}
+
 const unsigned int Screen::HEIGHT = 24;
 const unsigned int Screen::WEIGHT = 80;
 const unsigned int Screen::MAP_ELEMENT_HPOS = 0;

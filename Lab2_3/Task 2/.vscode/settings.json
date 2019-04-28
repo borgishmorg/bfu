@@ -29,6 +29,7 @@
         "tuple": "cpp",
         "typeinfo": "cpp",
         "utility": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "string": "cpp"
     }
 }

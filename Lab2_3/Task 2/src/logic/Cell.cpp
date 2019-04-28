@@ -54,13 +54,13 @@ std::string Cell::toString() const{
 
     res = "Players:\n";
     for(unsigned int i = 0; i < players_.size(); i++){
-        res += " " + std::to_string(i+1) + ": " + players_.at(i)->getName() + " " + players_.at(i)->getHPBar() + "\n";
+        res += " " + std::to_string(i+1) + ": " + players_.at(i)->toShortString() + "\n";
     }
     playersData.fill(res);
 
     res = "Items:\n";
     for(unsigned int i = 0; i < items_.size(); i++){
-        res += " " + std::to_string(i+1) + ": " + items_.at(i)->getName() + "\n";
+        res += " " + std::to_string(i+1) + ": " + items_.at(i)->toShortString() + "\n";
     }
     
     itemsData.fill(res);
@@ -89,6 +89,14 @@ void Cell::addItem(std::shared_ptr<Item> item){
 void Cell::removePlayer(std::shared_ptr<Player> player){
     for(int i = 0; i < players_.size(); i++){
         if(players_.at(i) == player){
+            players_.erase(players_.begin() + i);
+            break;
+        }
+    }
+}
+void Cell::removePlayer(Player * player){
+    for(int i = 0; i < players_.size(); i++){
+        if(players_.at(i).get() == player){
             players_.erase(players_.begin() + i);
             break;
         }

@@ -1,6 +1,10 @@
 #ifndef __SCREEN_ELEMENT__
 #define __SCREEN_ELEMENT__
 
+namespace BattleRoyale{
+    class ScreenElement;
+}
+
 #include "CharMatrix.hpp"
 
 namespace BattleRoyale{

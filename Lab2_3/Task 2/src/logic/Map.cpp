@@ -25,5 +25,19 @@ std::shared_ptr<Cell> Map::at(unsigned int hPos, unsigned int wPos){
     return cells_.at(hPos).at(wPos);
 }
 
+
+std::shared_ptr<Cell> Map::atRandomPos(){
+    int h, w;
+    do{
+        h = rand()%HEIGHT;
+        w = rand()%WEIGHT;
+    }while (at(h, w)->getType() != GRASS ||
+            at(h, w)->getPlayers().size() != 0 ||
+            at(h, w)->getItems().size() != 0);
+    return at(h, w);
+}
+
+
+
 const unsigned int Map::HEIGHT = 25;
 const unsigned int Map::WEIGHT = 25;

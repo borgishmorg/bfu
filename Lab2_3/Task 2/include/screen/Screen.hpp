@@ -10,7 +10,6 @@
 #include "PlayerScreenElement.hpp"
 #include "MessageScreenElement.hpp"
 #include "Player.hpp"
-#include "Cell.hpp"
 
 namespace BattleRoyale{
     class Screen{
@@ -26,8 +25,8 @@ namespace BattleRoyale{
             
             void draw() const;
 
-            static const unsigned int HEIGHT;
-            static const unsigned int WEIGHT;
+            unsigned int getHeight() const;
+            unsigned int getWeight() const;
         private:
             MapScreenElement mapElement_;
             PlayerScreenElement playerElement_;
@@ -37,7 +36,8 @@ namespace BattleRoyale{
             unsigned int weight_;
             CharMatrix data_;
 
-            
+            static const unsigned int HEIGHT;
+            static const unsigned int WEIGHT;
             static const unsigned int MAP_ELEMENT_HPOS;
             static const unsigned int MAP_ELEMENT_WPOS;
             static const unsigned int PLAYER_ELEMENT_HPOS;
