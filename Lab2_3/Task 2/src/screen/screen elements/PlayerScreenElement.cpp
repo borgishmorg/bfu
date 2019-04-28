@@ -4,7 +4,7 @@
 using BattleRoyale::PlayerScreenElement;
 
 PlayerScreenElement::PlayerScreenElement(unsigned int hPos, unsigned int wPos):
-    viewData_(VIEW_DATA_HEIGHT, VIEW_DATA_WEIGHT), ScreenElement(hPos, wPos, HEIGHT, WEIGHT){
+    viewData_(VIEW_DATA_HEIGHT, VIEW_DATA_WIDTH), ScreenElement(hPos, wPos, HEIGHT, WIDTH){
         data_.fill(BACKGROUND_DATA);
     };
 
@@ -40,8 +40,8 @@ const std::string PlayerScreenElement::BACKGROUND_DATA = std::string()+
             " +----------------------------------------------------+ ";
 
 const unsigned int PlayerScreenElement::HEIGHT = 12;
-const unsigned int PlayerScreenElement::WEIGHT = 56;
+const unsigned int PlayerScreenElement::WIDTH = 56;
 const unsigned int PlayerScreenElement::VIEW_DATA_HEIGHT = 8;
-const unsigned int PlayerScreenElement::VIEW_DATA_WEIGHT = 52;
+const unsigned int PlayerScreenElement::VIEW_DATA_WIDTH = 52;
 const unsigned int PlayerScreenElement::VIEW_DATA_HPOS = 2;
 const unsigned int PlayerScreenElement::VIEW_DATA_WPOS = 2;

@@ -8,7 +8,7 @@ namespace BattleRoyale
 {
     class CharMatrix{
         public:
-            CharMatrix(unsigned int height, unsigned int weight, char pattern = ' ');
+            CharMatrix(unsigned int height, unsigned int width, char pattern = ' ');
             ~CharMatrix();
 
             char & at(unsigned int hPos, unsigned int wPos);
@@ -17,13 +17,13 @@ namespace BattleRoyale
             void clear();
 
             const unsigned int getHeight() const;
-            const unsigned int getWeight() const;
+            const unsigned int getWidth() const;
             const std::string toString() const;
         private:
             const bool AUTO_LINE_BREAK = false;
 
             unsigned int height_;
-            unsigned int weight_;
+            unsigned int width_;
             std::vector<std::vector<char> > data_;  
     };
 }

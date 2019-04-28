@@ -2,8 +2,8 @@
 
 using BattleRoyale::ScreenElement;
 
-ScreenElement::ScreenElement(unsigned int hPos, unsigned int wPos, unsigned int height, unsigned int weight):
-    hPos_(hPos), wPos_(wPos), height_(height), weight_(weight), data_(height, weight){}
+ScreenElement::ScreenElement(unsigned int hPos, unsigned int wPos, unsigned int height, unsigned int width):
+    hPos_(hPos), wPos_(wPos), height_(height), width_(width), data_(height, width){}
 
 ScreenElement::~ScreenElement(){}
 

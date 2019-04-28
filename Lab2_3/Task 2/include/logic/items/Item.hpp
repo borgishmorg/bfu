@@ -2,17 +2,14 @@
 #define __ITEM__
 
 #include <string>
-#include <vector>
 #include <memory>
 
 namespace BattleRoyale{
     class Item;
 }
 
-#include "Cell.hpp"
-#include "Player.hpp"
 #include "Map.hpp"
-#include "CharMatrix.hpp"
+#include "Player.hpp"
 #include "Screen.hpp"
 
 namespace BattleRoyale{

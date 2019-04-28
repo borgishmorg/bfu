@@ -2,8 +2,8 @@
 
 using BattleRoyale::Screen;
 
-Screen::Screen(unsigned int height, unsigned int weight):
-    height_(height), weight_(weight), data_(height, weight){}
+Screen::Screen(unsigned int height, unsigned int width):
+    height_(height), width_(width), data_(height, width){}
 
 Screen::~Screen(){
     elements_.clear();
@@ -36,6 +36,6 @@ unsigned int Screen::getHeight() const{
     return height_;
 }
 
-unsigned int Screen::getWeight() const{
-    return weight_;
+unsigned int Screen::getWidth() const{
+    return width_;
 }

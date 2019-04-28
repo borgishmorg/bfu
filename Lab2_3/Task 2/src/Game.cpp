@@ -210,7 +210,7 @@ void Game::suicide(){
 }
 
 void Game::scoreboard(){
-    CharMatrix data(screen_.getHeight(), screen_.getWeight());
+    CharMatrix data(screen_.getHeight(), screen_.getWidth());
     std::string score = "   \n";
     data.fill("Scoreboard:", 2, 33);
     for(int i = 0; i < players_.size(); i++){
@@ -222,7 +222,7 @@ void Game::scoreboard(){
 
 void Game::end(){
     gameContinue = false;
-    CharMatrix data(screen_.getHeight(), screen_.getWeight());
+    CharMatrix data(screen_.getHeight(), screen_.getWidth());
     data.fill("End!", 11, 38);
     screen_.drawData(data);
     system("pause");

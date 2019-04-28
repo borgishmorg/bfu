@@ -10,7 +10,7 @@
 namespace BattleRoyale{
     class Screen{
         public:
-            Screen(unsigned int height, unsigned int weight);
+            Screen(unsigned int height, unsigned int width);
             ~Screen();
 
             void addElement(ScreenElement &);
@@ -19,12 +19,12 @@ namespace BattleRoyale{
             virtual void drawData(const CharMatrix & data);
 
             unsigned int getHeight() const;
-            unsigned int getWeight() const;
+            unsigned int getWidth() const;
         private:
             std::vector<ScreenElement*> elements_;
 
             unsigned int height_;
-            unsigned int weight_;
+            unsigned int width_;
             CharMatrix data_;
     };
 }

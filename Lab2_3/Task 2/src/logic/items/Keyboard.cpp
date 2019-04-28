@@ -13,7 +13,7 @@ void Keyboard::use(Player & user, Map & map, Screen & screen){
     user.addAP(-stats_.cost_);
     stats_.durability_--;
 
-    CharMatrix data(screen.getHeight(), screen.getWeight());
+    CharMatrix data(screen.getHeight(), screen.getWidth());
     data.fill("Enter some command:", 12, 30);
 
     screen.drawData(data);

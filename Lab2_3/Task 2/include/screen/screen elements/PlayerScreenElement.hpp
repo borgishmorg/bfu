@@ -6,7 +6,6 @@
 #include "CharMatrix.hpp"
 #include "ScreenElement.hpp"
 #include "Player.hpp"
-#include "Cell.hpp"
 
 namespace BattleRoyale{
     class PlayerScreenElement: public ScreenElement{
@@ -24,9 +23,9 @@ namespace BattleRoyale{
             
             static const std::string BACKGROUND_DATA;
             static const unsigned int HEIGHT;
-            static const unsigned int WEIGHT;
+            static const unsigned int WIDTH;
             static const unsigned int VIEW_DATA_HEIGHT;
-            static const unsigned int VIEW_DATA_WEIGHT;
+            static const unsigned int VIEW_DATA_WIDTH;
             static const unsigned int VIEW_DATA_HPOS;
             static const unsigned int VIEW_DATA_WPOS;
     };

@@ -1,16 +1,14 @@
 #ifndef __GAME_SCREEN__
 #define __GAME_SCREEN__
 
-#include <vector>
-#include <iostream>
+#include <string>
 
-#include "CharMatrix.hpp"
 #include "Screen.hpp"
-#include "ScreenElement.hpp"
 #include "MapScreenElement.hpp"
 #include "PlayerScreenElement.hpp"
 #include "MessageScreenElement.hpp"
 #include "Player.hpp"
+#include "Map.hpp"
 
 namespace BattleRoyale{
     class GameScreen: public Screen{
@@ -27,7 +25,7 @@ namespace BattleRoyale{
             MessageScreenElement messageElement_;
 
             static const unsigned int HEIGHT;
-            static const unsigned int WEIGHT;
+            static const unsigned int WIDTH;
             static const unsigned int MAP_ELEMENT_HPOS;
             static const unsigned int MAP_ELEMENT_WPOS;
             static const unsigned int PLAYER_ELEMENT_HPOS;

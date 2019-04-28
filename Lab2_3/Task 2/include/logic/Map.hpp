@@ -24,7 +24,7 @@ namespace BattleRoyale{
             std::vector< std::vector< std::shared_ptr<Cell> > > cells_;
 
             static const unsigned int HEIGHT;
-            static const unsigned int WEIGHT;
+            static const unsigned int WIDTH;
     };
 
 }

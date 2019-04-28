@@ -7,9 +7,9 @@ Map::Map(){
     cells_.resize(HEIGHT);
     for(unsigned int i = 0; i < HEIGHT; i++){
         //cells_.push_back(std::vector<std::shared_ptr<Cell> > ());
-        for (unsigned int j = 0; j < WEIGHT; j++)
+        for (unsigned int j = 0; j < WIDTH; j++)
             if(i != 0 && i != HEIGHT - 1 &&
-               j != 0 && j != WEIGHT - 1)
+               j != 0 && j != WIDTH - 1)
                 cells_.at(i).push_back(std::make_shared<Cell>(Cell::Type::GRASS, i, j));
             else
                 cells_.at(i).push_back(std::make_shared<Cell>(Cell::Type::WALL, i, j));
@@ -29,7 +29,7 @@ std::shared_ptr<Cell> Map::atRandomPos(){
     int h, w;
     do{
         h = rand()%HEIGHT;
-        w = rand()%WEIGHT;
+        w = rand()%WIDTH;
     }while (at(h, w)->getType() != Cell::Type::GRASS ||
             at(h, w)->getPlayers().size() != 0 ||
             at(h, w)->getItems().size() != 0);
@@ -39,4 +39,4 @@ std::shared_ptr<Cell> Map::atRandomPos(){
 
 
 const unsigned int Map::HEIGHT = 25;
-const unsigned int Map::WEIGHT = 25;
+const unsigned int Map::WIDTH = 25;

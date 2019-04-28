@@ -3,7 +3,7 @@
 using BattleRoyale::GameScreen;
 
 GameScreen::GameScreen(Map & map):
-    Screen(HEIGHT, WEIGHT), 
+    Screen(HEIGHT, WIDTH), 
     mapElement_(map, 0, 0),
     playerElement_(PLAYER_ELEMENT_HPOS, PLAYER_ELEMENT_WPOS),
     messageElement_(MESSAGE_ELEMENT_HPOS, MESSAGE_ELEMENT_WPOS){
@@ -31,7 +31,7 @@ void GameScreen::drawMessage(std::string message){
 
 
 const unsigned int GameScreen::HEIGHT = 24;
-const unsigned int GameScreen::WEIGHT = 80;
+const unsigned int GameScreen::WIDTH = 80;
 const unsigned int GameScreen::MAP_ELEMENT_HPOS = 0;
 const unsigned int GameScreen::MAP_ELEMENT_WPOS = 0;
 const unsigned int GameScreen::PLAYER_ELEMENT_HPOS = 0;

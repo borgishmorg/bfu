@@ -36,6 +36,7 @@ namespace BattleRoyale{
             bool gameContinue;
             Map map_;
             GameScreen screen_;
+            
             std::shared_ptr<Player> player_;
             std::vector<std::shared_ptr<Player> > players_;
             std::multiset<std::shared_ptr<Player>, bool (*)(std::shared_ptr<Player>, std::shared_ptr<Player>) > playersQueue_;
