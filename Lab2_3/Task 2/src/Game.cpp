@@ -64,21 +64,21 @@ void Game::move(){
         dj = 1;
     
 
-    std::shared_ptr<Cell> newCell = map_.at(player_->getPos()->getHPos() + di, 
+    std::shared_ptr<Cell> pos = map_.at(player_->getPos()->getHPos() + di, 
                                             player_->getPos()->getWPos() + dj);
     if(!player_->isActive()){
-        screen_.drawMessage("You can't go now!");
-    }else if(newCell->getType() == Cell::Type::GRASS){
+        screen_.drawMessage(player_->getName() + " can't go now!");
+    }else if(pos->getType() == Cell::Type::GRASS){
         player_->getPos()->removePlayer(player_);
-        newCell->addPlayer(player_);
-        player_->setPos(newCell);
+        pos->addPlayer(player_);
+        player_->setPos(pos);
         player_->addAP(-1);
 
-        std::string message = "Your lacation:\n";
+        std::string message = player_->getName() + " lacation:\n";
         message += player_->getPos()->toString();
         screen_.drawMessage(message);
     }else{
-        screen_.drawMessage("You can't go there!");
+        screen_.drawMessage(player_->getName() + " can't go there!");
     }
     
 }
@@ -105,14 +105,23 @@ void Game::look(){
     char w;
     int h;
     std::cin >> w >> h;
+
+    if(w < 'A' || w > 'Q' || h < 0 || h > 16){
+        screen_.drawMessage("You look at: Unknown place");
+        return;
+    }
+    
     int di = h - 8;
     int dj = w - 'I';
-    std::string message = std::string() + "You look at " + w + std::to_string(h) + ":\n";
+    std::string message = std::string() + "You look at: ";
+    
     try{
-        message += map_.at(player_->getPos()->getHPos() + di, player_->getPos()->getWPos() + dj)->toString();
+        message += w + std::to_string(h) + "\n" + 
+                   map_.at(player_->getPos()->getHPos() + di, player_->getPos()->getWPos() + dj)->toString();
     }catch(...){
-        message += "Unknown place\n";
+        message += "Unknown place";
     }
+    
     screen_.drawMessage(message);
 }
 

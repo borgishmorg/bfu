@@ -49,7 +49,7 @@ void MapScreenElement::update(){
 const std::string MapScreenElement::BACKGROUND_DATA = std::string()+
             " +--------------------+ "+
             "++                    ++"+
-            "|   ABCDEFGHIJKLMNOPR  |"+
+            "|   ABCDEFGHIJKLMNOPQ  |"+
             "|  +-----------------+ |"+
             "| 0|                 | |"+
             "| 1|                 | |"+
