@@ -10,6 +10,7 @@ Game::Game(const unsigned int NUMBER_OF_PLAYERS):
         for (unsigned int i = 0; i < NUMBER_OF_PLAYERS_; i++){
             players_.push_back(std::make_shared<Player>("Player " + std::to_string(i+1), map_.atRandomPos()));
             players_.back()->getPos()->addPlayer(players_.at(i));
+            players_.back()->addItem(std::make_shared<Keyboard>());
         }
             
         map_.atRandomPos()->addItem(std::make_shared<Keyboard>());
@@ -28,10 +29,11 @@ Game::~Game(){};
 
 void Game::play(){
     while (gameContinue){
+        std::string command;
+        
         screen_.focusAtPlayer(player_);
         screen_.draw();
 
-        std::string command;
         std::cin >> command;
 
         if (command == "move") move();
@@ -50,42 +52,42 @@ void Game::play(){
 }
 
 void Game::move(){
+    std::shared_ptr<Cell> pos;
     std::string direction;
+    std::string message;
+    int di = 0, dj = 0;
+    
     std::cin >> direction;
 
-    int di = 0, dj = 0;
-    if(direction == "up" || direction == "u")
-        di = -1;
-    if(direction == "down" || direction == "d")
-        di = 1;
-    if(direction == "left" || direction == "l")
-        dj = -1;
-    if(direction == "right" || direction == "r")
-        dj = 1;
-    
+    if(direction == "up" || direction == "u") di = -1;
+    else if(direction == "down" || direction == "d") di = 1;
+    else if(direction == "left" || direction == "l") dj = -1;
+    else if(direction == "right" || direction == "r") dj = 1;
+    else{
+        screen_.drawMessage(player_->getName() + " can't move " + direction);
+        return;
+    }
 
-    std::shared_ptr<Cell> pos = map_.at(player_->getPos()->getHPos() + di, 
-                                            player_->getPos()->getWPos() + dj);
-    if(!player_->isActive()){
-        screen_.drawMessage(player_->getName() + " can't go now!");
-    }else if(pos->getType() == Cell::Type::GRASS){
+    pos = map_.at(player_->getPos()->getHPos() + di, 
+                  player_->getPos()->getWPos() + dj);
+
+    if(!player_->isActive())
+        message = player_->getName() + " can't go now!";
+    else if(pos->getType() == Cell::Type::GRASS){
         player_->getPos()->removePlayer(player_);
         pos->addPlayer(player_);
         player_->setPos(pos);
         player_->addAP(-1);
 
-        std::string message = player_->getName() + " lacation:\n";
-        message += player_->getPos()->toString();
-        screen_.drawMessage(message);
-    }else{
-        screen_.drawMessage(player_->getName() + " can't go there!");
-    }
+        message = player_->getName() + " lacation:\n" + player_->getPos()->toString();
+    }else
+        message = player_->getName() + " can't go there!";
     
+    screen_.drawMessage(message);
 }
 
 void Game::turn(){
-    if (playersQueue_.empty())
-        playersQueueInit();
+    if (playersQueue_.empty()) playersQueueInit();
     
     do{
         if(playersQueue_.empty()){
@@ -96,28 +98,31 @@ void Game::turn(){
         playersQueue_.erase(playersQueue_.begin());
     }while (player_->isDead());
     
-    
     screen_.focusAtPlayer(player_);
     screen_.drawMessage(player_->getName() + " turn\n");
 }
 
 void Game::look(){
+    std::string message;
     char w;
     int h;
+    int di, dj;
+
     std::cin >> w >> h;
 
     if(w < 'A' || w > 'Q' || h < 0 || h > 16){
-        screen_.drawMessage("You look at: Unknown place");
+        screen_.drawMessage(player_->getName() + " look at: Unknown place");
         return;
     }
     
-    int di = h - 8;
-    int dj = w - 'I';
-    std::string message = std::string() + "You look at: ";
+    di = h - 8;
+    dj = w - 'I';
+    message = player_->getName() + " look at: ";
     
     try{
-        message += w + std::to_string(h) + "\n" + 
-                   map_.at(player_->getPos()->getHPos() + di, player_->getPos()->getWPos() + dj)->toString();
+        message += w + std::to_string(h) + "\n"; 
+        message += map_.at(player_->getPos()->getHPos() + di,
+                           player_->getPos()->getWPos() + dj)->toString();
     }catch(...){
         message += "Unknown place";
     }
@@ -126,15 +131,17 @@ void Game::look(){
 }
 
 void Game::take(){
-    int n;
+    std::string message;
     std::shared_ptr<Item> item;
+    int n;
+    
     std::cin >> n;
-    n--;
+    --n;
     
     try{
         item = player_->getPos()->getItems().at(n);
     }catch(...){
-        screen_.drawMessage("I can't find this item!\n");
+        screen_.drawMessage(player_->getName() + " can't find this item!\n");
         return;
     }
 
@@ -143,21 +150,24 @@ void Game::take(){
         player_->addAP(-1);
         player_->getPos()->removeItem(item);
 
-        std::string message = "Your lacation:\n";
-        message += player_->getPos()->toString();
-        screen_.drawMessage(message);
+        message = player_->getName() + " lacation:\n" + player_->getPos()->toString(); 
     }catch(std::string e){
         screen_.drawMessage(e);
+        return;
     }
+
+    screen_.drawMessage(message);
 }
 
 void Game::drop(){
     int n;
+
     std::cin >> n;
+    --n;
+
     try{
-        std::shared_ptr<Item> item = player_->throwItem(n-1);
-        player_->getPos()->addItem(item);
-        screen_.drawMessage(player_->getName() + " has dropped the " + item->getName());
+        player_->dropItem(n);
+        screen_.drawMessage(player_->getName() + " has dropped the item");
     }catch(std::string e){
         screen_.drawMessage(e);
     }
@@ -173,18 +183,21 @@ void Game::heal(){
 }
 
 void Game::use(){
-    int n;
-    std::cin >> n;
     std::shared_ptr<Item> item;
+    int n;
+
+    std::cin >> n;
+    --n;
+    
     try{
-        item = player_->getItem(n-1);
+        item = player_->getItem(n);
     }catch(...){
         screen_.drawMessage(player_->getName() + " don't have this item!");
         return;
     }
     try{
         item->use(*player_, map_, screen_);
-        if(item->isBroken()) player_->removeItem(n-1);
+        if(item->isBroken()) player_->removeItem(n);
     }catch(std::string e){
         screen_.drawMessage(e);
     }
@@ -192,19 +205,15 @@ void Game::use(){
 
 void Game::upgrade(){
     std::string type;
+
     std::cin >> type;
+    
     try{
-        if (type == "IP" || type == "ip"){
-            player_->upgrade(0);
-        }else if (type == "AP" || type == "ap"){
-            player_->upgrade(1);
-        }else if (type == "HP" || type == "hp"){
-            player_->upgrade(2);
-        }else if (type == "CP" || type == "cp"){
-            player_->upgrade(3);
-        }else{
-            screen_.drawMessage(player_->getName() + " can't upgrade " + type);
-        }
+        if (type == "IP" || type == "ip") player_->upgrade(0);
+        else if (type == "AP" || type == "ap") player_->upgrade(1);
+        else if (type == "HP" || type == "hp") player_->upgrade(2);
+        else if (type == "CP" || type == "cp") player_->upgrade(3);
+        else screen_.drawMessage(player_->getName() + " can't upgrade " + type);
     }catch(std::string e){
         screen_.drawMessage(e);
     }
@@ -212,27 +221,30 @@ void Game::upgrade(){
 
 void Game::suicide(){
     player_->die();
+
     screen_.drawMessage(player_->getName() + " successfully suicide");
-    screen_.draw();
     system("pause");
+
     turn();
 }
 
 void Game::scoreboard(){
     CharMatrix data(screen_.getHeight(), screen_.getWidth());
-    std::string score = "   \n";
+    
     data.fill("Scoreboard:", 2, 33);
-    for(int i = 0; i < players_.size(); i++){
+    for(int i = 0; i < players_.size(); i++)
         data.fill(players_.at(i)->toShortString() + " - " + std::to_string(players_.at(i)->getScore()), 4 + i, 27);
-    }
+
     screen_.drawData(data);
     system("pause");
 }
 
 void Game::end(){
-    gameContinue = false;
     CharMatrix data(screen_.getHeight(), screen_.getWidth());
+    
     data.fill("End!", 11, 38);
+    gameContinue = false;
+    
     screen_.drawData(data);
     system("pause");
 }
@@ -241,12 +253,11 @@ void Game::end(){
 
 void Game::playersQueueInit(){
     playersQueue_.clear();
-    for(auto player: players_){
-        if (!player->isDead())
-        {
+    
+    for(auto player: players_)
+        if (!player->isDead()){
             player->addScore(1);
             player->turn();
             playersQueue_.insert(player);
-        }
-    }       
+        }   
 }

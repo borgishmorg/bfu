@@ -9,10 +9,6 @@ CharMatrix::~CharMatrix(){}
 
 
 
-char & CharMatrix::at(unsigned int hPos, unsigned int wPos){
-    return data_.at(hPos).at(wPos);
-}
-
 void CharMatrix::fill(const CharMatrix & charMatrix, unsigned int hPos, unsigned int wPos){
     for(unsigned int i = 0; i < charMatrix.height_; i++)
         for(unsigned int j = 0; j < charMatrix.width_; j++)
@@ -24,6 +20,7 @@ void CharMatrix::fill(const CharMatrix & charMatrix, unsigned int hPos, unsigned
 void CharMatrix::fill(const std::string & str, unsigned int hPos, unsigned int wPos){
     unsigned int i = hPos;
     unsigned int j = wPos;
+
     for(char c : str){
         if(j >= width_){
             ++i;
@@ -49,6 +46,10 @@ void CharMatrix::clear(){
 }
 
 
+
+char & CharMatrix::at(unsigned int hPos, unsigned int wPos){
+    return data_.at(hPos).at(wPos);
+}
 
 const unsigned int CharMatrix::getHeight() const{
     return height_;

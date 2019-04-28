@@ -13,19 +13,17 @@ namespace BattleRoyale{
             Screen(unsigned int height, unsigned int width);
             ~Screen();
 
-            void addElement(ScreenElement &);
-
             virtual void draw();
             virtual void drawData(const CharMatrix & data);
+
+            void addElement(ScreenElement &);
 
             unsigned int getHeight() const;
             unsigned int getWidth() const;
         private:
-            std::vector<ScreenElement*> elements_;
-
-            unsigned int height_;
-            unsigned int width_;
             CharMatrix data_;
+
+            std::vector<ScreenElement*> elements_;
     };
 }
 

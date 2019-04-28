@@ -3,6 +3,8 @@
 
 using BattleRoyale::PlayerScreenElement;
 
+
+
 PlayerScreenElement::PlayerScreenElement(unsigned int hPos, unsigned int wPos):
     viewData_(VIEW_DATA_HEIGHT, VIEW_DATA_WIDTH), ScreenElement(hPos, wPos, HEIGHT, WIDTH){
         data_.fill(BACKGROUND_DATA);
@@ -24,6 +26,8 @@ void PlayerScreenElement::update(){
     viewData_.fill(player_->toString());
     data_.fill(viewData_, VIEW_DATA_HPOS, VIEW_DATA_WPOS);
 }
+
+
 
 const std::string PlayerScreenElement::BACKGROUND_DATA = std::string()+
             " +----------------------------------------------------+ "+

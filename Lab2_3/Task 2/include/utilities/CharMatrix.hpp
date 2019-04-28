@@ -11,11 +11,11 @@ namespace BattleRoyale
             CharMatrix(unsigned int height, unsigned int width, char pattern = ' ');
             ~CharMatrix();
 
-            char & at(unsigned int hPos, unsigned int wPos);
             void fill(const CharMatrix & matrix, unsigned int hPos = 0, unsigned int wPos = 0);
             void fill(const std::string & str, unsigned int hPos = 0, unsigned int wPos = 0);
             void clear();
 
+            char & at(unsigned int hPos, unsigned int wPos);
             const unsigned int getHeight() const;
             const unsigned int getWidth() const;
             const std::string toString() const;

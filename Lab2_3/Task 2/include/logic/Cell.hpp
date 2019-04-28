@@ -20,15 +20,6 @@ namespace BattleRoyale{
             Cell(Type, unsigned int hPos, unsigned int wPos);
             ~Cell();
 
-            Type getType() const;
-            unsigned int getHPos() const;
-            unsigned int getWPos() const;
-
-            std::vector<std::shared_ptr<Player> > & getPlayers();
-            std::vector<std::shared_ptr<Item> > & getItems();
-
-            std::string toString() const;
-
             void setType(Type);
             void addPlayer(std::shared_ptr<Player>);
             void addItem(std::shared_ptr<Item>);
@@ -36,6 +27,13 @@ namespace BattleRoyale{
             void removePlayer(std::shared_ptr<Player>);
             void removePlayer(Player *);
             void removeItem(std::shared_ptr<Item>);
+
+            Type getType() const;
+            unsigned int getHPos() const;
+            unsigned int getWPos() const;
+            std::vector<std::shared_ptr<Player> > & getPlayers();
+            std::vector<std::shared_ptr<Item> > & getItems();
+            std::string toString() const;
 
             static char charFromCellType(Type);
             static std::string stringFromCellType(Type);

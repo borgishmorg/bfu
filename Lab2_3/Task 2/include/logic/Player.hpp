@@ -30,19 +30,10 @@ namespace BattleRoyale{
             Player(std::string, std::shared_ptr<Cell>);
             ~Player();
 
+            void dropItem(int n);
+            void removeItem(int n);
             void turn();
             void heal();
-
-            const std::string & getName() const;
-            int getScore() const;
-            const Stats & getStats() const;
-            const Stats & getMaxStats() const;
-            int getUpgradePoints() const;
-            std::shared_ptr<Cell> getPos();
-            std::shared_ptr<Item> getItem(int n);
-
-            std::shared_ptr<Item> throwItem(int n);
-            void removeItem(int n);
             void die();
             void upgrade(int n);
 
@@ -56,6 +47,13 @@ namespace BattleRoyale{
             void addUpgradePoints(int delta);
             void addItem(std::shared_ptr<Item> item);
 
+            const std::string & getName() const;
+            int getScore() const;
+            const Stats & getStats() const;
+            const Stats & getMaxStats() const;
+            int getUpgradePoints() const;
+            std::shared_ptr<Cell> getPos();
+            std::shared_ptr<Item> getItem(int n);
             const std::string toString() const;
             const std::string toShortString() const;
             bool isDead() const;
@@ -63,13 +61,10 @@ namespace BattleRoyale{
         private:
             std::string name_;
             std::shared_ptr<Cell> pos_;
-            
             Stats stats_;
             Stats maxStats_;
-            
             int score_;
             int upgradePoints_;
-
             bool dead_;
 
             std::vector<std::shared_ptr<Item> > items_;

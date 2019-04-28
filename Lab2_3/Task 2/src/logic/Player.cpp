@@ -10,8 +10,9 @@ Player::Stats::Stats(int IP, int AP, int HP, int CP):
     IP_(IP), AP_(AP), HP_(HP), CP_(CP){}
 
 Player::Stats::~Stats(){}
-
-
+/*
+============================================================================================================
+*/
 Player::Player(std::string name, std::shared_ptr<Cell> pos):
     name_(name), pos_(pos),
     maxStats_(INITIAL_IP, INITIAL_AP, INITIAL_HP, INITIAL_CP),
@@ -24,8 +25,24 @@ Player::~Player(){
         item = nullptr;
     items_.clear();
 }
+/*
+============================================================================================================
+*/
+void Player::dropItem(int n){
+    if (stats_.HP_ <= 0)
+        throw name_ + " can't drop item now!";
+    try{
+        pos_->addItem(getItem(n));
+        removeItem(n);
+    }catch(...){
+        throw name_ + " doesn't have this item!";
+    }
+}
 
-
+void Player::removeItem(int n){
+    items_.erase(items_.begin()+n);
+    addCP(-1);
+}
 
 void Player::turn(){
     stats_.AP_ = maxStats_.AP_;
@@ -42,64 +59,15 @@ void Player::heal(){
     }
 }
 
-
-const std::string & Player::getName() const{
-    return name_;
-}
-
-int Player::getScore() const{
-    return score_;
-}
-
-const Player::Stats & Player::getStats() const{
-    return stats_;
-}
-
-const Player::Stats & Player::getMaxStats() const{
-    return maxStats_;
-}
-
-int Player::getUpgradePoints() const{
-    return upgradePoints_;
-}
-
-std::shared_ptr<Cell> Player::getPos(){
-    return pos_;
-}
-
-std::shared_ptr<Item> Player::getItem(int n){
-    return items_.at(n);
-}
-
-
-
-std::shared_ptr<Item> Player::throwItem(int n){
-    if (stats_.HP_ <= 0)
-        throw name_ + " can't drop item now!";
-    std::shared_ptr<Item> item;
-    try{
-        item = items_.at(n);
-    }catch(...){
-        throw name_ + " doesn't have this item!";
-    }
-    items_.erase(items_.begin()+n);
-    addCP(-1);
-    return item;
-}
-
-void Player::removeItem(int n){
-    items_.erase(items_.begin()+n);
-    addCP(-1);
-}
-
 void Player::die(){
     dead_ = true;
     pos_->removePlayer(this);
 }
 
 void Player::upgrade(int n){
-    if (n < 0 || n > 3 || upgradePoints_ <= 0)
+    if (n < 0 || n > 3 || upgradePoints_ <= 0) 
         throw name_ + " can't upgrade this";
+    
     switch (n){
         case 0:{
             int deltaIP = 5 + rand()%6;
@@ -128,9 +96,9 @@ void Player::upgrade(int n){
     }
     upgradePoints_--;
 }
-
-
-
+/*
+============================================================================================================
+*/
 void Player::setName(std::string name){
     name_ = name;
 }
@@ -169,34 +137,64 @@ void Player::addItem(std::shared_ptr<Item> item){
     }else if(stats_.CP_ >= maxStats_.CP_){
         throw getName() + " haven't empty slot\n";
     }else{
-        stats_.CP_++;
+        addCP(1);
         items_.push_back(item);
     }
 }
+/*
+============================================================================================================
+*/
+const std::string & Player::getName() const{
+    return name_;
+}
 
+int Player::getScore() const{
+    return score_;
+}
 
+const Player::Stats & Player::getStats() const{
+    return stats_;
+}
+
+const Player::Stats & Player::getMaxStats() const{
+    return maxStats_;
+}
+
+int Player::getUpgradePoints() const{
+    return upgradePoints_;
+}
+
+std::shared_ptr<Cell> Player::getPos(){
+    return pos_;
+}
+
+std::shared_ptr<Item> Player::getItem(int n){
+    return items_.at(n);
+}
 
 const std::string Player::toString() const{
-    std::string res;
-    res = name_ + " ( HP " + std::to_string(stats_.HP_) + "/" + std::to_string(maxStats_.HP_) + "  " +
-                     "AP " + std::to_string(stats_.AP_) + "/" + std::to_string(maxStats_.AP_) + "  " +
-                     "IP " + std::to_string(stats_.IP_) + "/" + std::to_string(maxStats_.IP_) + " ) ";
-    if(upgradePoints_ > 0)
-        res += " New level!";
+    std::string res = name_;
+
+    res += " ( HP " + std::to_string(stats_.HP_) + "/" + std::to_string(maxStats_.HP_) + "  " +
+              "AP " + std::to_string(stats_.AP_) + "/" + std::to_string(maxStats_.AP_) + "  " +
+              "IP " + std::to_string(stats_.IP_) + "/" + std::to_string(maxStats_.IP_) + " ) ";
+    
+    if(upgradePoints_ > 0) res += " New level!";
+    
     res += "\nItems ("+ std::to_string(stats_.CP_) + "/" + std::to_string(maxStats_.CP_) +"):\n";
-    for(int i = 0; i < items_.size(); i++){
+    
+    for(int i = 0; i < items_.size(); i++)
         res += std::to_string(i+1) + ": " + items_.at(i)->toShortString() + "  ";
-    }
+    
     return res;
 }
 
 const std::string Player::toShortString() const{
     std::string res = name_;
-    if(dead_){
-        res += " (DEAD) ";
-    }else{
-        res += " (" + std::to_string(stats_.HP_) + "/" + std::to_string(maxStats_.HP_) + ") " ;
-    }
+    
+    if(dead_) res += " (DEAD) ";
+    else res += " (" + std::to_string(stats_.HP_) + "/" + std::to_string(maxStats_.HP_) + ")" ;
+    
     return res;
 }
 
@@ -207,6 +205,7 @@ bool Player::isDead() const{
 bool Player::isActive() const{
     return stats_.HP_ > 0 && stats_.AP_ > 0;
 }
+
 
 
 const int Player::INITIAL_IP = 0;
