@@ -25,7 +25,7 @@
                 "src\\logic\\Map.cpp",
                 "src\\logic\\Player.cpp",
                 "src\\logic\\items\\Item.cpp",
-                "src\\logic\\items\\Keyboard.cpp",
+                "src\\logic\\items\\Label.cpp",
 
                 "src\\utilities\\CharMatrix.cpp",
 

@@ -19,8 +19,9 @@ namespace BattleRoyale{
             {
                 unsigned int durability_;
                 unsigned int cost_;
+                bool droppable_;
 
-                Stats(unsigned int durability, unsigned int cost);
+                Stats(unsigned int durability, unsigned int cost, bool droppable);
                 ~Stats();
             };
             
@@ -29,17 +30,16 @@ namespace BattleRoyale{
             ~Item();
 
             virtual void use(Player & user, Map & map, Screen & screen) = 0;
-            virtual const std::string toString() const = 0;
+            virtual const std::string toString() const;
             virtual const std::string toShortString() const;
 
             const std::string & getName() const;
             bool isBroken() const;
+            bool isDroppable() const;
         protected:
             std::string name_;
             
             Stats stats_;
-            Stats maxStats_;
     };
 }
-
 #endif

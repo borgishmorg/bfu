@@ -31,12 +31,15 @@ Player::~Player(){
 void Player::dropItem(int n){
     if (stats_.HP_ <= 0)
         throw name_ + " can't drop item now!";
+    
     try{
-        pos_->addItem(getItem(n));
-        removeItem(n);
-    }catch(...){
-        throw name_ + " doesn't have this item!";
+        if(!getItem(n)->isDroppable())
+            throw getItem(n)->getName() + " can't be dropped!";
+    }catch(std::string e){
+        throw e;
     }
+    pos_->addItem(getItem(n));
+    removeItem(n);
 }
 
 void Player::removeItem(int n){
@@ -169,7 +172,11 @@ std::shared_ptr<Cell> Player::getPos(){
 }
 
 std::shared_ptr<Item> Player::getItem(int n){
-    return items_.at(n);
+    try{
+        return items_.at(n);
+    }catch(...){
+        throw name_ + " doesn't have this item!";
+    } 
 }
 
 const std::string Player::toString() const{

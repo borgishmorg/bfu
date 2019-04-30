@@ -10,15 +10,11 @@ Game::Game(const unsigned int NUMBER_OF_PLAYERS):
         for (unsigned int i = 0; i < NUMBER_OF_PLAYERS_; i++){
             players_.push_back(std::make_shared<Player>("Player " + std::to_string(i+1), map_.atRandomPos()));
             players_.back()->getPos()->addPlayer(players_.at(i));
-            players_.back()->addItem(std::make_shared<Keyboard>());
+            players_.back()->addItem(std::make_shared<Label>());
         }
             
-        map_.atRandomPos()->addItem(std::make_shared<Keyboard>());
-        map_.atRandomPos()->addItem(std::make_shared<Keyboard>());
-        map_.atRandomPos()->addItem(std::make_shared<Keyboard>());
-        map_.atRandomPos()->addItem(std::make_shared<Keyboard>());
-        map_.atRandomPos()->addItem(std::make_shared<Keyboard>());
-        map_.atRandomPos()->addItem(std::make_shared<Keyboard>());
+        map_.atRandomPos()->addItem(std::make_shared<Label>());
+        map_.atRandomPos()->addItem(std::make_shared<Label>());
 
         turn();
     }

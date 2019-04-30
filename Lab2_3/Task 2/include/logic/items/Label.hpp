@@ -1,5 +1,5 @@
-#ifndef __KEYBOARD__
-#define __KEYBOARD__
+#ifndef __Label__
+#define __Label__
 
 #include <string>
 #include <iostream>
@@ -7,12 +7,11 @@
 #include "Item.hpp"
 
 namespace BattleRoyale{
-    class Keyboard: public Item {
+    class Label: public Item {
         public:
-            Keyboard();
-            ~Keyboard();
+            Label();
+            ~Label();
             virtual void use(Player & user, Map & map, Screen & screen) override;
-            virtual const std::string toString() const override;
     };
 }
 
