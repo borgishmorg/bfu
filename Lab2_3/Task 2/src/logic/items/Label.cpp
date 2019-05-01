@@ -17,6 +17,7 @@ void Label::use(Player & user, Map & map, Screen & screen){
     data.fill("Enter new name:", 12, 32);
     screen.drawData(data);
     std::cin >> command;
+    screen.drawMessage(user.getName() + " has changed his name on " + command);
     user.setName(command);
     stats_.durability_--;
 }

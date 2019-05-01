@@ -86,7 +86,7 @@ void Player::upgrade(int n){
         }
         case 2:{
             int deltaHP = 10 + rand()%31;
-            stats_.HP_ += deltaHP;
+            if(stats_.HP_ > 0) stats_.HP_ += deltaHP;
             maxStats_.HP_ += deltaHP;
             break;
         }

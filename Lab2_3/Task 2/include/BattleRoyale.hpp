@@ -5,9 +5,9 @@
 #include "CharMatrix.hpp"
 
 //Logic includes
-#include "Effect.hpp"
 #include "Item.hpp"
 #include "Label.hpp"
+#include "Weapon.hpp"
 #include "Cell.hpp"
 #include "Map.hpp"
 #include "Player.hpp"

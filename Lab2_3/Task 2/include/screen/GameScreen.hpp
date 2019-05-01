@@ -18,7 +18,7 @@ namespace BattleRoyale{
 
             void focusAtPlayer(std::shared_ptr<Player>);
             
-            virtual void drawMessage(std::string message);
+            virtual void drawMessage(std::string message) override;
         private:
             MapScreenElement mapElement_;
             PlayerScreenElement playerElement_;
@@ -32,7 +32,6 @@ namespace BattleRoyale{
             static const unsigned int PLAYER_ELEMENT_WPOS;
             static const unsigned int MESSAGE_ELEMENT_HPOS;
             static const unsigned int MESSAGE_ELEMENT_WPOS;
-
     };
 }
 

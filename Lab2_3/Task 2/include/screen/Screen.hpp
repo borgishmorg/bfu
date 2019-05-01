@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <iostream>
+#include <string>
 
 #include "CharMatrix.hpp"
 #include "ScreenElement.hpp"
@@ -15,6 +16,7 @@ namespace BattleRoyale{
 
             virtual void draw();
             virtual void drawData(const CharMatrix & data);
+            virtual void drawMessage(std::string message) = 0;
 
             void addElement(ScreenElement &);
 

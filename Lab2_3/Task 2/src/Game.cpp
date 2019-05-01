@@ -11,6 +11,7 @@ Game::Game(const unsigned int NUMBER_OF_PLAYERS):
             players_.push_back(std::make_shared<Player>("Player " + std::to_string(i+1), map_.atRandomPos()));
             players_.back()->getPos()->addPlayer(players_.at(i));
             players_.back()->addItem(std::make_shared<Label>());
+            players_.back()->addItem(std::make_shared<Weapon>("Bow", 100, 1, 50, 50, 100));
         }
             
         map_.atRandomPos()->addItem(std::make_shared<Label>());
@@ -27,8 +28,14 @@ void Game::play(){
     while (gameContinue){
         std::string command;
         
+
         screen_.focusAtPlayer(player_);
         screen_.draw();
+        if(player_->isDead()){
+            screen_.drawMessage(player_->getName() + " is dead!");
+            system("pause");
+            turn();
+        } 
 
         std::cin >> command;
 
@@ -68,7 +75,7 @@ void Game::move(){
                   player_->getPos()->getWPos() + dj);
 
     if(!player_->isActive())
-        message = player_->getName() + " can't go now!";
+        message = player_->getName() + " can't move now!";
     else if(pos->getType() == Cell::Type::GRASS){
         player_->getPos()->removePlayer(player_);
         pos->addPlayer(player_);
@@ -83,17 +90,18 @@ void Game::move(){
 }
 
 void Game::turn(){
-    if (playersQueue_.empty()) playersQueueInit();
-    
-    do{
-        if(playersQueue_.empty()){
-            end();
-            return;
-        }
-        player_ = *playersQueue_.begin();
+    while (!playersQueue_.empty() && (*playersQueue_.begin())->isDead()){
         playersQueue_.erase(playersQueue_.begin());
-    }while (player_->isDead());
-    
+    }
+    if(playersQueue_.empty()) playersQueueInit();
+    if(playersQueue_.empty()){    
+        end();
+        return;
+    }
+
+    player_ = *playersQueue_.begin();
+    playersQueue_.erase(playersQueue_.begin());
+
     screen_.focusAtPlayer(player_);
     screen_.drawMessage(player_->getName() + " turn\n");
 }
@@ -251,9 +259,9 @@ void Game::playersQueueInit(){
     playersQueue_.clear();
     
     for(auto player: players_)
-        if (!player->isDead()){
+        if (!(player->isDead())){
             player->addScore(1);
             player->turn();
             playersQueue_.insert(player);
-        }   
+        }
 }

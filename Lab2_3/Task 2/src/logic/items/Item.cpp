@@ -19,7 +19,7 @@ const std::string Item::toString() const{
 }
 
 const std::string Item::toShortString() const{
-    return name_ + " (" + std::to_string(stats_.durability_) + ") ";
+    return name_ + " (" + (stats_.durability_ < 100 ? std::to_string(stats_.durability_):"99+") + ") " + std::to_string(stats_.cost_)+"p";
 }
 
 

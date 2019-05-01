@@ -10,7 +10,6 @@
                 "-std=c++14",
                 "-Iinclude",
                 "-I\"include\\logic\"",
-                "-I\"include\\logic\\effects\"",
                 "-I\"include\\logic\\items\"",
                 "-I\"include\\screen\"",
                 "-I\"include\\screen\\screen elements\"",
@@ -26,6 +25,7 @@
                 "src\\logic\\Player.cpp",
                 "src\\logic\\items\\Item.cpp",
                 "src\\logic\\items\\Label.cpp",
+                "src\\logic\\items\\Weapon.cpp",
 
                 "src\\utilities\\CharMatrix.cpp",
 
