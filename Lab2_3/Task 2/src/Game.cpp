@@ -11,11 +11,20 @@ Game::Game(const unsigned int NUMBER_OF_PLAYERS):
             players_.push_back(std::make_shared<Player>("Player " + std::to_string(i+1), map_.atRandomPos()));
             players_.back()->getPos()->addPlayer(players_.at(i));
             players_.back()->addItem(std::make_shared<Label>());
-            players_.back()->addItem(std::make_shared<Weapon>("Bow", 100, 1, 50, 50, 100));
         }
-            
-        map_.atRandomPos()->addItem(std::make_shared<Label>());
-        map_.atRandomPos()->addItem(std::make_shared<Label>());
+
+        for(int i = 0; i < 2; i++) 
+            map_.atRandomPos()->addItem(std::make_shared<Label>());
+        for(int i = 0; i < 5; i++)
+            map_.atRandomPos()->addItem(std::make_shared<Bow>());
+        for(int i = 0; i < 5; i++)
+            map_.atRandomPos()->addItem(std::make_shared<Sword>());
+        for(int i = 0; i < 3; i++)
+            map_.atRandomPos()->addItem(std::make_shared<AK47>());
+        for(int i = 0; i < 3; i++)
+            map_.atRandomPos()->addItem(std::make_shared<GrenadeLauncher>());
+        for(int i = 0; i < 1; i++)
+            map_.atRandomPos()->addItem(std::make_shared<SniperRifle>());
 
         turn();
     }
@@ -28,7 +37,6 @@ void Game::play(){
     while (gameContinue){
         std::string command;
         
-
         screen_.focusAtPlayer(player_);
         screen_.draw();
         if(player_->isDead()){

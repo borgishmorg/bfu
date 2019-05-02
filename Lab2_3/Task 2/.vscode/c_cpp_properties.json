@@ -9,7 +9,6 @@
                 "${workspaceFolder}/include/utilities/*",
                 "${workspaceFolder}/include/logic/*",
                 "${workspaceFolder}/include/screen/screen elements",
-                "${workspaceFolder}/include/logic/effects",
                 "${workspaceFolder}/include/logic/items"
             ],
             "defines": [

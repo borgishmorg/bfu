@@ -68,5 +68,5 @@ std::vector<std::shared_ptr<Player> > Map::getPlayersInRadius(Cell & cell, int r
 
 
 
-const unsigned int Map::HEIGHT = 25;
-const unsigned int Map::WIDTH = 25;
+const unsigned int Map::HEIGHT = 100;
+const unsigned int Map::WIDTH = 100;

@@ -37,7 +37,7 @@ void Weapon::use(Player & user, Map & map, Screen & screen){
     if(n <= 0 || n > targets.size())
         throw "There is no target with index " + std::to_string(n);
     
-    attack(*targets.at(n-1), screen);
+    attack(user, *targets.at(n-1), screen);
 
     if (targets.at(n-1)->getStats().HP_ <= 0 
         && rand()%100 < weaponStats_.deathChance_){
@@ -47,18 +47,12 @@ void Weapon::use(Player & user, Map & map, Screen & screen){
         screen.drawMessage(user.getName() + " kill " + targets.at(n-1)->getName() + " with " + name_);
     }
 
-    backfire(user, screen);
-    
     user.addAP(-stats_.cost_);
     stats_.durability_--;
 }
 
-void Weapon::attack(Player & target, Screen & screen){
+void Weapon::attack(Player & user, Player & target, Screen & screen){
     target.addHP(-weaponStats_.damage_);
     screen.drawMessage(target.getName() + " takes " + std::to_string(weaponStats_.damage_) + " damage with " + name_);
     system("pause");
-}
-
-void Weapon::backfire(Player & user, Screen & screen){
-
 }

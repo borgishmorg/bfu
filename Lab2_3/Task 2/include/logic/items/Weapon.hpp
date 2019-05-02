@@ -21,9 +21,8 @@ namespace BattleRoyale{
             ~Weapon();
 
             virtual void use(Player & user, Map & map, Screen & screen) override;
-            virtual void attack(Player & target, Screen & screen);
-            virtual void backfire(Player & user, Screen & screen);
-        private:
+            virtual void attack(Player & user, Player & target, Screen & screen);
+        protected:
             WeaponStats weaponStats_;
     };
 }
