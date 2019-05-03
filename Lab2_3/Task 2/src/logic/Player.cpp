@@ -48,7 +48,7 @@ void Player::removeItem(int n){
 }
 
 void Player::turn(){
-    stats_.AP_ = maxStats_.AP_;
+    stats_.AP_ = std::max(stats_.AP_, maxStats_.AP_);
 }
 
 void Player::heal(){
@@ -119,7 +119,8 @@ void Player::addIP(int delta){
 }
 
 void Player::addAP(int delta){
-    stats_.AP_ = std::min(maxStats_.AP_, stats_.AP_ + delta);
+    stats_.AP_ += delta;
+    //stats_.AP_ = std::min(maxStats_.AP_, stats_.AP_ + delta);
 }
 
 void Player::addHP(int delta){
@@ -130,6 +131,21 @@ void Player::addCP(int delta){
     stats_.CP_ = std::min(maxStats_.CP_, stats_.CP_ + delta);
 }
 
+void Player::addMaxIP(int delta){
+    maxStats_.CP_ += delta;
+}
+
+void Player::addMaxAP(int delta){
+    maxStats_.AP_ = std::max(0, maxStats_.AP_ + delta);
+}
+
+void Player::addMaxHP(int delta){
+    maxStats_.HP_ = std::max(0, maxStats_.HP_ + delta);
+}
+
+void Player::addMaxCP(int delta){
+    maxStats_.CP_ = std::max(0, maxStats_.CP_ + delta);
+}
 void Player::addUpgradePoints(int delta){
     upgradePoints_ += delta;
 }

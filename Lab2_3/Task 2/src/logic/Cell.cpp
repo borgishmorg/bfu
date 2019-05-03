@@ -26,9 +26,12 @@ Cell::~Cell(){
 void Cell::setType(Type type){
     type_ = type;
 
-    if(type == WALL)
+    if(type == WALL){
         for(auto player: players_)
             player->die();
+        players_.clear();
+        items_.clear();
+    }     
 }
 
 void Cell::addPlayer(std::shared_ptr<Player> player){

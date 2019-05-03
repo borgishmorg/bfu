@@ -11,25 +11,32 @@ MapScreenElement::MapScreenElement(Map & map, unsigned int hPos, unsigned int wP
     };
 
 MapScreenElement::~MapScreenElement(){
-    player_ = nullptr;
+    playerPos_ = nullptr;
 };
 
 
 
 void MapScreenElement::focusAtPlayer(std::shared_ptr<Player> player){
-    player_ = player;
+    playerPos_ = player->getPos();
     update();
 }
+
+void MapScreenElement::focusAtPlayer(Player & player){
+    playerPos_ = player.getPos();
+    update();
+}
+
+
 
 void MapScreenElement::update(){
     for(unsigned int i = 0; i < VIEW_DATA_HEIGHT; i++)
         for(unsigned int j = 0; j < VIEW_DATA_WIDTH; j++)
-            if(player_ == nullptr) viewData_.at(i, j) = ' ';
+            if(playerPos_ == nullptr) viewData_.at(i, j) = ' ';
             else if(i == VIEW_DATA_HEIGHT/2  && j == VIEW_DATA_WIDTH/2) viewData_.at(i, j) = 'P';
             else{
                 try{
-                    Cell & cell = *map_.at(player_->getPos()->getHPos() + i - VIEW_DATA_HEIGHT/2,
-                                        player_->getPos()->getWPos() + j - VIEW_DATA_WIDTH/2);
+                    Cell & cell = *map_.at(playerPos_->getHPos() + i - VIEW_DATA_HEIGHT/2,
+                                        playerPos_->getWPos() + j - VIEW_DATA_WIDTH/2);
                     
                     if(cell.getPlayers().size() != 0) viewData_.at(i, j) = 'E';
                     else if(cell.getItems().size() != 0) viewData_.at(i, j) = 'I';

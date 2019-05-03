@@ -11,6 +11,7 @@ Game::Game(const unsigned int NUMBER_OF_PLAYERS):
             players_.push_back(std::make_shared<Player>("Player " + std::to_string(i+1), map_.atRandomPos()));
             players_.back()->getPos()->addPlayer(players_.at(i));
             players_.back()->addItem(std::make_shared<Label>());
+            players_.back()->addItem(std::make_shared<ScrollOfClumsiness>());
         }
 
         for(int i = 0; i < 4; i++) 
@@ -31,6 +32,18 @@ Game::Game(const unsigned int NUMBER_OF_PLAYERS):
             map_.atRandomPos()->addItem(std::make_shared<GPS>());
         for(int i = 0; i < 20; i++)
             map_.atRandomPos()->addItem(std::make_shared<Apple>());
+        for(int i = 0; i < 2; i++)
+            map_.atRandomPos()->addItem(std::make_shared<Backpack>());
+        for(int i = 0; i < 2; i++)
+            map_.atRandomPos()->addItem(std::make_shared<ThirdLeg>());
+        for(int i = 0; i < 6; i++)
+            map_.atRandomPos()->addItem(std::make_shared<PotionOfHealth>());
+        for(int i = 0; i < 6; i++)
+            map_.atRandomPos()->addItem(std::make_shared<PotionOfCheerfulness>());
+        for(int i = 0; i < 10; i++)
+            map_.atRandomPos()->addItem(std::make_shared<ScrollOfWall>());
+        for(int i = 0; i < 5; i++)
+            map_.atRandomPos()->addItem(std::make_shared<ScrollOfClumsiness>());
 
         turn();
     }

@@ -10,9 +10,9 @@ Map::Map(){
         for (unsigned int j = 0; j < WIDTH; j++)
             if(i != 0 && i != HEIGHT - 1 &&
                j != 0 && j != WIDTH - 1)
-                cells_.at(i).push_back(std::make_shared<Cell>(Cell::Type::GRASS, i, j));
+                cells_.at(i).push_back(std::make_shared<Cell>(Cell::GRASS, i, j));
             else
-                cells_.at(i).push_back(std::make_shared<Cell>(Cell::Type::WALL, i, j));
+                cells_.at(i).push_back(std::make_shared<Cell>(Cell::WALL, i, j));
 }
 
 Map::~Map(){}

@@ -15,13 +15,15 @@ namespace BattleRoyale{
             ~MapScreenElement();
 
             void focusAtPlayer(std::shared_ptr<Player>);
+            void focusAtPlayer(Player &);
+            
 
             virtual void update() override;
         private:
             CharMatrix viewData_;
 
             Map & map_;
-            std::shared_ptr<Player> player_;
+            std::shared_ptr<Cell> playerPos_;
             
             static const std::string BACKGROUND_DATA;
             static const unsigned int HEIGHT;

@@ -9,7 +9,11 @@
                 "${workspaceFolder}/include/utilities/*",
                 "${workspaceFolder}/include/logic/*",
                 "${workspaceFolder}/include/screen/screen elements",
-                "${workspaceFolder}/include/logic/items"
+                "${workspaceFolder}/include/logic/items",
+                "${workspaceFolder}/include/logic/items/weapons",
+                "${workspaceFolder}/include/logic/items/scrolls",
+                "${workspaceFolder}/include/logic/items/potions",
+                "${workspaceFolder}/include/logic/items/others"
             ],
             "defines": [
                 "_DEBUG",

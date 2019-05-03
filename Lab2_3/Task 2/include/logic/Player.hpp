@@ -44,6 +44,10 @@ namespace BattleRoyale{
             void addAP(int delta);
             void addHP(int delta);
             void addCP(int delta);
+            void addMaxIP(int delta);
+            void addMaxAP(int delta);
+            void addMaxHP(int delta);
+            void addMaxCP(int delta);
             void addUpgradePoints(int delta);
             void addItem(std::shared_ptr<Item> item);
 
