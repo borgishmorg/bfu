@@ -16,6 +16,7 @@
 #include "SniperRifle.hpp"
 #include "Stone.hpp"
 #include "GPS.hpp"
+#include "Apple.hpp"
 // Other logic
 #include "Cell.hpp"
 #include "Map.hpp"

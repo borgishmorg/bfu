@@ -29,6 +29,8 @@ Game::Game(const unsigned int NUMBER_OF_PLAYERS):
             map_.atRandomPos()->addItem(std::make_shared<Stone>());
         for(int i = 0; i < 4; i++)
             map_.atRandomPos()->addItem(std::make_shared<GPS>());
+        for(int i = 0; i < 20; i++)
+            map_.atRandomPos()->addItem(std::make_shared<Apple>());
 
         turn();
     }
