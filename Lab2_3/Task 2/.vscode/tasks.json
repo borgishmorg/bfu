@@ -32,6 +32,7 @@
                 "src\\logic\\items\\GrenadeLauncher.cpp",
                 "src\\logic\\items\\SniperRifle.cpp",
                 "src\\logic\\items\\Stone.cpp",
+                "src\\logic\\items\\GPS.cpp",
 
                 "src\\utilities\\CharMatrix.cpp",
 

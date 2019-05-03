@@ -27,6 +27,8 @@ Game::Game(const unsigned int NUMBER_OF_PLAYERS):
             map_.atRandomPos()->addItem(std::make_shared<SniperRifle>());
         for(int i = 0; i < 100; i++)
             map_.atRandomPos()->addItem(std::make_shared<Stone>());
+        for(int i = 0; i < 4; i++)
+            map_.atRandomPos()->addItem(std::make_shared<GPS>());
 
         turn();
     }
