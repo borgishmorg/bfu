@@ -1,15 +1,13 @@
-#ifndef __SNIPER_RIFLE__
-#define __SNIPER_RIFLE__
-
-#include <cstdlib>
+#ifndef __STONE__
+#define __STONE__
 
 #include "Weapon.hpp"
 
 namespace BattleRoyale{
-    class SniperRifle: public Weapon{
+    class Stone: public Weapon{
         public:
-            SniperRifle();
-            ~SniperRifle();
+            Stone();
+            ~Stone();
         private:
             static const std::string NAME_;
             static const int DURABILITY_;

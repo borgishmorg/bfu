@@ -31,6 +31,7 @@
                 "src\\logic\\items\\AK-47.cpp",
                 "src\\logic\\items\\GrenadeLauncher.cpp",
                 "src\\logic\\items\\SniperRifle.cpp",
+                "src\\logic\\items\\Stone.cpp",
 
                 "src\\utilities\\CharMatrix.cpp",
 

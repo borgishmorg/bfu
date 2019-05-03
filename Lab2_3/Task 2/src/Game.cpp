@@ -13,18 +13,20 @@ Game::Game(const unsigned int NUMBER_OF_PLAYERS):
             players_.back()->addItem(std::make_shared<Label>());
         }
 
-        for(int i = 0; i < 2; i++) 
+        for(int i = 0; i < 4; i++) 
             map_.atRandomPos()->addItem(std::make_shared<Label>());
-        for(int i = 0; i < 5; i++)
+        for(int i = 0; i < 10; i++)
             map_.atRandomPos()->addItem(std::make_shared<Bow>());
-        for(int i = 0; i < 5; i++)
+        for(int i = 0; i < 10; i++)
             map_.atRandomPos()->addItem(std::make_shared<Sword>());
-        for(int i = 0; i < 3; i++)
+        for(int i = 0; i < 6; i++)
             map_.atRandomPos()->addItem(std::make_shared<AK47>());
-        for(int i = 0; i < 3; i++)
+        for(int i = 0; i < 6; i++)
             map_.atRandomPos()->addItem(std::make_shared<GrenadeLauncher>());
-        for(int i = 0; i < 1; i++)
+        for(int i = 0; i < 2; i++)
             map_.atRandomPos()->addItem(std::make_shared<SniperRifle>());
+        for(int i = 0; i < 100; i++)
+            map_.atRandomPos()->addItem(std::make_shared<Stone>());
 
         turn();
     }

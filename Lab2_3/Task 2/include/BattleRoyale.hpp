@@ -5,6 +5,7 @@
 #include "CharMatrix.hpp"
 
 //Logic includes
+// Items
 #include "Item.hpp"
 #include "Label.hpp"
 #include "Weapon.hpp"
@@ -13,6 +14,8 @@
 #include "AK-47.hpp"
 #include "GrenadeLauncher.hpp"
 #include "SniperRifle.hpp"
+#include "Stone.hpp"
+// Other logic
 #include "Cell.hpp"
 #include "Map.hpp"
 #include "Player.hpp"
