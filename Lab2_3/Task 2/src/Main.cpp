@@ -4,7 +4,7 @@ using namespace std;
 using namespace BattleRoyale;
 
 int main(){
-    Game game(5);
+    Game game(10);
     game.play();
     return 0;
 }

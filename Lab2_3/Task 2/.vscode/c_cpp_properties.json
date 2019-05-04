@@ -13,6 +13,7 @@
                 "${workspaceFolder}/include/logic/items/weapons",
                 "${workspaceFolder}/include/logic/items/scrolls",
                 "${workspaceFolder}/include/logic/items/potions",
+                "${workspaceFolder}/include/logic/items/marvel",
                 "${workspaceFolder}/include/logic/items/others"
             ],
             "defines": [

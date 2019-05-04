@@ -64,6 +64,7 @@ void Player::heal(){
 
 void Player::die(){
     dead_ = true;
+    stats_.HP_ = std::min(0, stats_.HP_);
     pos_->removePlayer(this);
 }
 

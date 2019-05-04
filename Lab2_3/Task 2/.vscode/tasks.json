@@ -15,6 +15,7 @@
                 "-I\"include\\logic\\items\\scrolls\"",
                 "-I\"include\\logic\\items\\potions\"",
                 "-I\"include\\logic\\items\\others\"",
+                "-I\"include\\logic\\items\\marvel\"",
                 "-I\"include\\screen\"",
                 "-I\"include\\screen\\screen elements\"",
                 "-I\"include\\utilities\"",
@@ -46,6 +47,8 @@
                 "src\\logic\\items\\scrolls\\Scroll.cpp",
                 "src\\logic\\items\\scrolls\\ScrollOfWall.cpp",
                 "src\\logic\\items\\scrolls\\ScrollOfClumsiness.cpp",
+                "src\\logic\\items\\marvel\\InfinityGauntlet.cpp",
+                "src\\logic\\items\\marvel\\InfinityStone.cpp",
 
                 "src\\utilities\\CharMatrix.cpp",
 

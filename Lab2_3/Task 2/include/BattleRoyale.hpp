@@ -25,6 +25,8 @@
 #include "Scroll.hpp"
 #include "ScrollOfWall.hpp"
 #include "ScrollOfClumsiness.hpp"
+#include "InfinityGauntlet.hpp"
+#include "InfinityStone.hpp"
 // Other logic
 #include "Cell.hpp"
 #include "Map.hpp"

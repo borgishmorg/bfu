@@ -11,40 +11,47 @@ Game::Game(const unsigned int NUMBER_OF_PLAYERS):
             players_.push_back(std::make_shared<Player>("Player " + std::to_string(i+1), map_.atRandomPos()));
             players_.back()->getPos()->addPlayer(players_.at(i));
             players_.back()->addItem(std::make_shared<Label>());
-            players_.back()->addItem(std::make_shared<ScrollOfClumsiness>());
         }
 
         for(int i = 0; i < 4; i++) 
             map_.atRandomPos()->addItem(std::make_shared<Label>());
-        for(int i = 0; i < 10; i++)
+        for(int i = 0; i < 15; i++)
             map_.atRandomPos()->addItem(std::make_shared<Bow>());
-        for(int i = 0; i < 10; i++)
+        for(int i = 0; i < 15; i++)
             map_.atRandomPos()->addItem(std::make_shared<Sword>());
-        for(int i = 0; i < 6; i++)
+        for(int i = 0; i < 10; i++)
             map_.atRandomPos()->addItem(std::make_shared<AK47>());
-        for(int i = 0; i < 6; i++)
+        for(int i = 0; i < 8; i++)
             map_.atRandomPos()->addItem(std::make_shared<GrenadeLauncher>());
-        for(int i = 0; i < 2; i++)
+        for(int i = 0; i < 3; i++)
             map_.atRandomPos()->addItem(std::make_shared<SniperRifle>());
         for(int i = 0; i < 100; i++)
             map_.atRandomPos()->addItem(std::make_shared<Stone>());
         for(int i = 0; i < 4; i++)
             map_.atRandomPos()->addItem(std::make_shared<GPS>());
-        for(int i = 0; i < 20; i++)
+        for(int i = 0; i < 25; i++)
             map_.atRandomPos()->addItem(std::make_shared<Apple>());
         for(int i = 0; i < 2; i++)
             map_.atRandomPos()->addItem(std::make_shared<Backpack>());
         for(int i = 0; i < 2; i++)
             map_.atRandomPos()->addItem(std::make_shared<ThirdLeg>());
-        for(int i = 0; i < 6; i++)
+        for(int i = 0; i < 10; i++)
             map_.atRandomPos()->addItem(std::make_shared<PotionOfHealth>());
-        for(int i = 0; i < 6; i++)
+        for(int i = 0; i < 10; i++)
             map_.atRandomPos()->addItem(std::make_shared<PotionOfCheerfulness>());
         for(int i = 0; i < 10; i++)
             map_.atRandomPos()->addItem(std::make_shared<ScrollOfWall>());
         for(int i = 0; i < 5; i++)
             map_.atRandomPos()->addItem(std::make_shared<ScrollOfClumsiness>());
-
+        
+        map_.atRandomPos()->addItem(std::make_shared<InfinityGauntlet>());
+        map_.atRandomPos()->addItem(std::make_shared<InfinityStone>(InfinityStone::MIND));
+        map_.atRandomPos()->addItem(std::make_shared<InfinityStone>(InfinityStone::POWER));
+        map_.atRandomPos()->addItem(std::make_shared<InfinityStone>(InfinityStone::REALITY));
+        map_.atRandomPos()->addItem(std::make_shared<InfinityStone>(InfinityStone::SOUL));
+        map_.atRandomPos()->addItem(std::make_shared<InfinityStone>(InfinityStone::SPACE));
+        map_.atRandomPos()->addItem(std::make_shared<InfinityStone>(InfinityStone::TIME));
+        
         turn();
     }
 
