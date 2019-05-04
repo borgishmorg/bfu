@@ -17,6 +17,8 @@ namespace BattleRoyale{
 
     class Player{
         public:
+            enum StatType{NO_TYPE, IP, AP, HP, CP};
+
             struct Stats{
                 int IP_; //initiative points
                 int AP_; //action points
@@ -35,19 +37,15 @@ namespace BattleRoyale{
             void turn();
             void heal();
             void die();
-            void upgrade(int n);
+            void upgrade(StatType type);
+            void upgrade(StatType type, int dLevel);
+
+            void takeDamage(int damage);
+            void takeFatigue(int fatigue);
 
             void setName(std::string);
             void setPos(std::shared_ptr<Cell>);
             void addScore(int delta);
-            void addIP(int delta);
-            void addAP(int delta);
-            void addHP(int delta);
-            void addCP(int delta);
-            void addMaxIP(int delta);
-            void addMaxAP(int delta);
-            void addMaxHP(int delta);
-            void addMaxCP(int delta);
             void addUpgradePoints(int delta);
             void addItem(std::shared_ptr<Item> item);
 
@@ -62,6 +60,8 @@ namespace BattleRoyale{
             const std::string toShortString() const;
             bool isDead() const;
             bool isActive() const;
+
+            static StatType stringToStatType(std::string type);
         private:
             std::string name_;
             std::shared_ptr<Cell> pos_;
@@ -72,6 +72,11 @@ namespace BattleRoyale{
             bool dead_;
 
             std::vector<std::shared_ptr<Item> > items_;
+            
+            void addCP(int delta);
+            void addIP(int delta);
+            void addAP(int delta);
+            void addHP(int delta);
             
             static const int INITIAL_IP;
             static const int INITIAL_AP;

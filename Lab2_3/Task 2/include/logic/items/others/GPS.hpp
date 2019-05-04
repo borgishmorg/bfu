@@ -11,7 +11,6 @@ namespace BattleRoyale{
 
             virtual void use(Player & user, Map & map, Screen & screen) override;
 
-            virtual const std::string toShortString() const override;
             virtual const std::string toString() const override;
     };
 }

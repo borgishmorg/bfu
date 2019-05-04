@@ -31,7 +31,6 @@ namespace BattleRoyale{
 
             virtual void use(Player & user, Map & map, Screen & screen) = 0;
             virtual const std::string toString() const;
-            virtual const std::string toShortString() const;
 
             const std::string & getName() const;
             bool isBroken() const;

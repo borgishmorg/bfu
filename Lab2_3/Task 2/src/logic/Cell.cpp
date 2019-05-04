@@ -13,10 +13,8 @@ Cell::Cell(Type type, unsigned int hPos, unsigned int wPos):
 Cell::~Cell(){
     for(auto & player: players_)
         player = nullptr;
-
     for(auto & item: items_)
         item = nullptr;
-
     players_.clear();
     items_.clear();
 }
@@ -27,8 +25,8 @@ void Cell::setType(Type type){
     type_ = type;
 
     if(type == WALL){
-        for(auto player: players_)
-            player->die();
+        for(int i = players_.size() - 1; i >= 0; i--)
+            players_.at(i)->die();
         players_.clear();
         items_.clear();
     }     
@@ -103,7 +101,7 @@ std::string Cell::toString() const{
 
     res = "Items:\n";
     for(unsigned int i = 0; i < items_.size(); i++){
-        res += " " + std::to_string(i+1) + ": " + items_.at(i)->toShortString() + "\n";
+        res += " " + std::to_string(i+1) + ": " + items_.at(i)->toString() + "\n";
     }
     
     itemsData.fill(res);

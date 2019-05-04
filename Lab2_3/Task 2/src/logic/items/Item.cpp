@@ -15,10 +15,6 @@ Item::Item(std::string name, unsigned int durability, unsigned int cost):
 Item::~Item(){}
 
 const std::string Item::toString() const{
-    return toShortString();
-}
-
-const std::string Item::toShortString() const{
     return name_ + " (" + (stats_.durability_ < 100 ? std::to_string(stats_.durability_):"99+") + ") " + std::to_string(stats_.cost_)+"p";
 }
 

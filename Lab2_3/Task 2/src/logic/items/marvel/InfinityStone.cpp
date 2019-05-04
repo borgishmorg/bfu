@@ -17,12 +17,8 @@ void InfinityStone::use(Player & user, Map & map, Screen & screen){
 
 
 
-const std::string InfinityStone::toShortString() const{
-    return name_;   
-}
-
 const std::string InfinityStone::toString() const{
-    return toShortString();
+    return name_;   
 }
 
 

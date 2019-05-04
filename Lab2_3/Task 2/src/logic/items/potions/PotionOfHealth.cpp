@@ -11,10 +11,10 @@ PotionOfHealth::~PotionOfHealth(){}
 
 void PotionOfHealth::drink(Player & drinker, Screen & screen){
     if(rand()%100 < 80){
-        drinker.addHP(100);
+        drinker.takeDamage(-100);
         screen.drawMessage(drinker.getName() + " is healed by " + name_ + "!");
     }else{
-        drinker.addHP(-30);
+        drinker.takeDamage(30);
         screen.drawMessage(drinker.getName() + " is poisoned by " + name_ + "!");
     }
 }

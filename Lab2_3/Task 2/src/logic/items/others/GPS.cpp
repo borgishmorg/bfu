@@ -19,10 +19,6 @@ void GPS::use(Player & user, Map & map, Screen & screen){
 
 
 
-const std::string GPS::toShortString() const{
-    return name_ + " " + std::to_string(stats_.cost_) + "p";
-}
-
 const std::string GPS::toString() const{
-    return toShortString();
+    return name_ + " " + std::to_string(stats_.cost_) + "p";
 }

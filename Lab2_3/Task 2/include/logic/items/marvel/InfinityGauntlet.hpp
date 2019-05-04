@@ -14,7 +14,6 @@ namespace BattleRoyale{
 
             virtual void use(Player & user, Map & mao, Screen & screen) override;
 
-            virtual const std::string toShortString() const override;
             virtual const std::string toString() const override;
         private:
             enum State{EMPTY, FULL, BROKEN};

@@ -12,7 +12,7 @@ AK47::~AK47(){}
 void AK47::attack(Player & user, Player & target, Screen & screen){
     for(int i = 0; i < 3; i++){
         int damage = 1 + rand() % weaponStats_.damage_;
-        target.addHP(-damage);
+        target.takeDamage(damage);
         screen.drawMessage(target.getName() + " takes " + std::to_string(damage) + " damage with " + name_);
         system("pause");
     }

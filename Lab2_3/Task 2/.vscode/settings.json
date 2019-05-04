@@ -33,6 +33,7 @@
         "string": "cpp",
         "cmath": "cpp",
         "deque": "cpp",
-        "numeric": "cpp"
+        "numeric": "cpp",
+        "algorithm": "cpp"
     }
 }

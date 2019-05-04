@@ -16,18 +16,26 @@ namespace BattleRoyale{
 namespace BattleRoyale{
     class Map{
         public:
-            Map();
+            Map(int height, int width);
             ~Map();
 
-            std::shared_ptr<Cell> at(unsigned int hPos, unsigned int wPos);
-            std::shared_ptr<Cell> atRandomPos();
+            void moveWalls();
 
+            std::shared_ptr<Cell> at(unsigned int hPos, unsigned int wPos);
+            std::shared_ptr<Cell> at(Player & player, char w, int h);
+            std::shared_ptr<Cell> atRandomPos();
+            
             std::vector<std::shared_ptr<Player> > getPlayersInRadius(Cell & cell, int radius);
         private:
             std::vector< std::vector< std::shared_ptr<Cell> > > cells_;
 
-            static const unsigned int HEIGHT;
-            static const unsigned int WIDTH;
+            int upWall_;
+            int downWall_;
+            int leftWall_;
+            int rightWall_;
+
+            const int HEIGHT_;
+            const int WIDTH_;
     };
 }
 #endif

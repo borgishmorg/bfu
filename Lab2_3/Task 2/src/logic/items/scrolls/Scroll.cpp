@@ -33,6 +33,6 @@ void Scroll::use(Player & user, Map & map, Screen & screen){
         throw user.getName() + " can't use " + name_ + " on position " + w +  std::to_string(h) +"!";
     }
 
-    user.addAP(-stats_.cost_);
+    user.takeFatigue(stats_.cost_);
     --stats_.durability_;
 }

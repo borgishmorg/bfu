@@ -47,12 +47,12 @@ void Weapon::use(Player & user, Map & map, Screen & screen){
         screen.drawMessage(user.getName() + " kill " + targets.at(n-1)->getName() + " with " + name_);
     }
 
-    user.addAP(-stats_.cost_);
+    user.takeFatigue(stats_.cost_);
     stats_.durability_--;
 }
 
 void Weapon::attack(Player & user, Player & target, Screen & screen){
-    target.addHP(-weaponStats_.damage_);
+    target.takeDamage(weaponStats_.damage_);
     screen.drawMessage(target.getName() + " takes " + std::to_string(weaponStats_.damage_) + " damage with " + name_);
     system("pause");
 }

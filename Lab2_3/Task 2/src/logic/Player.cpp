@@ -52,14 +52,13 @@ void Player::turn(){
 }
 
 void Player::heal(){
-    if(stats_.AP_ <= 0){
+    if(stats_.AP_ <= 0)
         throw name_ + " can't heal now!\n";
-    }else if(stats_.HP_ >= maxStats_.HP_){
+    if(stats_.HP_ >= maxStats_.HP_)
         throw name_ + " already have max health!\n";
-    }else{
-        addHP(5);
-        addAP(-1);
-    }
+    
+    addHP(5);
+    addAP(-1);
 }
 
 void Player::die(){
@@ -68,30 +67,30 @@ void Player::die(){
     pos_->removePlayer(this);
 }
 
-void Player::upgrade(int n){
-    if (n < 0 || n > 3 || upgradePoints_ <= 0) 
+void Player::upgrade(StatType type){
+    if (type == NO_TYPE || upgradePoints_ <= 0) 
         throw name_ + " can't upgrade this";
     
-    switch (n){
-        case 0:{
+    switch (type){
+        case IP:{
             int deltaIP = 5 + rand()%6;
             stats_.IP_ += deltaIP;
             maxStats_.IP_ += deltaIP;
             break;
         }
-        case 1:{
+        case AP:{
             int deltaAP = 2 + rand()%4;
             //stats_.AP_ += deltaAP;
             maxStats_.AP_ += deltaAP;
             break;
         }
-        case 2:{
+        case HP:{
             int deltaHP = 10 + rand()%31;
             if(stats_.HP_ > 0) stats_.HP_ += deltaHP;
             maxStats_.HP_ += deltaHP;
             break;
         }
-        case 3:{
+        case CP:{
             int deltaCP = 1 + rand()%2;
             //stats_.CP_ += deltaCP;
             maxStats_.CP_ += deltaCP;
@@ -99,6 +98,45 @@ void Player::upgrade(int n){
         }    
     }
     upgradePoints_--;
+}
+
+void Player::upgrade(StatType type, int dLevel){
+    if (type == NO_TYPE || upgradePoints_ <= 0) 
+        throw name_ + " can't upgrade this";
+    
+    switch (type){
+        case IP:{
+            stats_.IP_ += dLevel;
+            maxStats_.IP_ += dLevel;
+            break;
+        }
+        case AP:{
+            //stats_.AP_ += deltaAP;
+            maxStats_.AP_ += dLevel;
+            break;
+        }
+        case HP:{
+            if(stats_.HP_ > 0) stats_.HP_ += dLevel;
+            maxStats_.HP_ += dLevel;
+            break;
+        }
+        case CP:{
+            //stats_.CP_ += deltaCP;
+            maxStats_.CP_ += dLevel;
+            break;
+        }    
+    }
+    upgradePoints_--;
+}
+/*
+============================================================================================================
+*/
+void Player::takeDamage(int damage){
+    addHP(-damage);
+}
+
+void Player::takeFatigue(int fatigue){
+    addAP(-fatigue);
 }
 /*
 ============================================================================================================
@@ -115,51 +153,18 @@ void Player::addScore(int delta){
     score_ += delta;
 }
 
-void Player::addIP(int delta){
-    stats_.IP_ = std::min(maxStats_.IP_, stats_.IP_ + delta);
-}
-
-void Player::addAP(int delta){
-    stats_.AP_ += delta;
-    //stats_.AP_ = std::min(maxStats_.AP_, stats_.AP_ + delta);
-}
-
-void Player::addHP(int delta){
-    stats_.HP_ = std::min(maxStats_.HP_, stats_.HP_ + delta);
-}
-
-void Player::addCP(int delta){
-    stats_.CP_ = std::min(maxStats_.CP_, stats_.CP_ + delta);
-}
-
-void Player::addMaxIP(int delta){
-    maxStats_.CP_ += delta;
-}
-
-void Player::addMaxAP(int delta){
-    maxStats_.AP_ = std::max(0, maxStats_.AP_ + delta);
-}
-
-void Player::addMaxHP(int delta){
-    maxStats_.HP_ = std::max(0, maxStats_.HP_ + delta);
-}
-
-void Player::addMaxCP(int delta){
-    maxStats_.CP_ = std::max(0, maxStats_.CP_ + delta);
-}
 void Player::addUpgradePoints(int delta){
     upgradePoints_ += delta;
 }
 
 void Player::addItem(std::shared_ptr<Item> item){
-    if(!isActive()){
-        throw getName() + " can't take " + item->getName() + " now \n";
-    }else if(stats_.CP_ >= maxStats_.CP_){
-        throw getName() + " haven't empty slot\n";
-    }else{
-        addCP(1);
-        items_.push_back(item);
-    }
+    if(!isActive())
+        throw getName() + " can't take " + item->getName() + " now!\n";
+    if(stats_.CP_ >= maxStats_.CP_)
+        throw getName() + " haven't empty space!\n";
+    
+    addCP(1);
+    items_.push_back(item);
 }
 /*
 ============================================================================================================
@@ -208,7 +213,7 @@ const std::string Player::toString() const{
     res += "\nItems ("+ std::to_string(stats_.CP_) + "/" + std::to_string(maxStats_.CP_) +"):\n";
     
     for(int i = 0; i < items_.size(); i++)
-        res += std::to_string(i+1) + ": " + items_.at(i)->toShortString() + "  ";
+        res += std::to_string(i+1) + ": " + items_.at(i)->toString() + "  ";
     
     return res;
 }
@@ -229,9 +234,38 @@ bool Player::isDead() const{
 bool Player::isActive() const{
     return stats_.HP_ > 0 && stats_.AP_ > 0;
 }
+/*
+============================================================================================================
+*/
+Player::StatType Player::stringToStatType(std::string type){
+    if (type == "IP" || type == "ip") return IP;
+    else if (type == "AP" || type == "ap") return AP;
+    else if (type == "HP" || type == "hp") return HP;
+    else if (type == "CP" || type == "cp") return CP;
+    else return NO_TYPE;
+}
+/*
+============================================================================================================
+*/
+void Player::addIP(int delta){
+    stats_.IP_ = std::min(maxStats_.IP_, stats_.IP_ + delta);
+}
 
+void Player::addAP(int delta){
+    stats_.AP_ += delta;
+    //stats_.AP_ = std::min(maxStats_.AP_, stats_.AP_ + delta);
+}
 
+void Player::addHP(int delta){
+    stats_.HP_ = std::min(maxStats_.HP_, stats_.HP_ + delta);
+}
 
+void Player::addCP(int delta){
+    stats_.CP_ = std::min(maxStats_.CP_, stats_.CP_ + delta);
+}
+/*
+============================================================================================================
+*/
 const int Player::INITIAL_IP = 0;
 const int Player::INITIAL_AP = 3;
 const int Player::INITIAL_HP = 100;

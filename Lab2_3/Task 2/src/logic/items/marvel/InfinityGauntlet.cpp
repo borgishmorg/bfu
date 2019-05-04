@@ -54,7 +54,7 @@ void InfinityGauntlet::use(Player & user, Map & map, Screen & screen){
 
             screen.drawMessage(msg + "Fate has come true!");
 
-            user.addAP(-user.getStats().AP_);
+            user.takeFatigue(-user.getStats().AP_);
             name_ = "Broken Infinity Gauntlet";
             stats_.droppable_ = false;
             state_ = BROKEN;
@@ -69,10 +69,6 @@ void InfinityGauntlet::use(Player & user, Map & map, Screen & screen){
 
 
 
-const std::string InfinityGauntlet::toShortString() const{
-    return name_;
-}
-
 const std::string InfinityGauntlet::toString() const{
-    return toShortString();
+    return name_;
 }

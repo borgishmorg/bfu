@@ -11,11 +11,11 @@ GrenadeLauncher::~GrenadeLauncher(){}
 
 void GrenadeLauncher::attack(Player & user, Player & target, Screen & screen){
     if(rand()%100 < backfireChance_){
-        user.addHP(-weaponStats_.damage_);
+        user.takeDamage(weaponStats_.damage_);
         screen.drawMessage("Backfire!\n" + user.getName() + " takes " + std::to_string(weaponStats_.damage_) + " damage with " + name_);
         system("pause");
     }else{
-        target.addHP(-weaponStats_.damage_);
+        target.takeDamage(weaponStats_.damage_);
         screen.drawMessage(target.getName() + " takes " + std::to_string(weaponStats_.damage_) + " damage with " + name_);
         system("pause");
     }
