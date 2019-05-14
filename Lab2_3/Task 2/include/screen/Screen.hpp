@@ -18,6 +18,7 @@ namespace BattleRoyale{
             virtual void drawData(const CharMatrix & data);
             virtual void drawMessage(std::string message) = 0;
 
+            void fix();
             void addElement(ScreenElement &);
 
             unsigned int getHeight() const;

@@ -31,6 +31,11 @@ void Screen::drawData(const CharMatrix & data){
 
 
 
+void Screen::fix(){
+    data_.setAutoLineBreak(!data_.getAutoLineBreak());
+    draw();
+}
+
 void Screen::addElement(ScreenElement & element){
     elements_.push_back(&element);
 }

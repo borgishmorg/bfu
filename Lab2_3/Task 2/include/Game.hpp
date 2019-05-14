@@ -31,6 +31,7 @@ namespace BattleRoyale{
             void scoreboard();
             void end();
             void win();
+            void fix();
 
             void playersQueueInit();
 

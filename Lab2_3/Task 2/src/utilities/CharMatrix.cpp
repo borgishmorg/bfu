@@ -3,7 +3,9 @@
 using BattleRoyale::CharMatrix;
 
 CharMatrix::CharMatrix(unsigned int height, unsigned int width, char pattern):
-    height_(height), width_(width), data_(height, std::vector<char>(width, pattern)){}
+    height_(height), width_(width), 
+    data_(height, std::vector<char>(width, pattern)),
+    AUTO_LINE_BREAK_(false){}
 
 CharMatrix::~CharMatrix(){}
 
@@ -65,8 +67,17 @@ const std::string CharMatrix::toString() const{
     for (unsigned int i = 0; i < height_; i++){
         for (unsigned int j = 0; j < width_; j++)
             str.push_back(data_.at(i).at(j));
-        if(AUTO_LINE_BREAK) str.push_back('\n');
+        if(AUTO_LINE_BREAK_) str.push_back('\n');
     }
     
     return str;
+}
+
+
+const bool CharMatrix::getAutoLineBreak() const{
+    return AUTO_LINE_BREAK_;
+}
+
+void CharMatrix::setAutoLineBreak(bool val){
+    AUTO_LINE_BREAK_ = val;
 }

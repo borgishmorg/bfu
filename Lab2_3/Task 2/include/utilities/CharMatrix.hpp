@@ -18,15 +18,16 @@ namespace BattleRoyale
             char & at(unsigned int hPos, unsigned int wPos);
             const unsigned int getHeight() const;
             const unsigned int getWidth() const;
+            const bool getAutoLineBreak() const;
             const std::string toString() const;
-        private:
-            const bool AUTO_LINE_BREAK = false;
 
+            void setAutoLineBreak(bool);
+        private:
             unsigned int height_;
             unsigned int width_;
             std::vector<std::vector<char> > data_;  
+            
+            bool AUTO_LINE_BREAK_ = false;
     };
 }
-
-
 #endif

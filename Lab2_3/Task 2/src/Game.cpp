@@ -80,6 +80,7 @@ void Game::play(){
         else if(command == "suicide") suicide();
         else if(command == "scoreboard" || command == "score") scoreboard();
         else if (command == "exit") return;
+        else if (command == "fix") fix();
         else screen_.drawMessage("\"" + command + "\" command doesn't exist\n");
     }
 }
@@ -136,12 +137,14 @@ void Game::turn(){
             system("pause");
         } 
         playersQueueInit();
-        if(playersQueue_.size() == 1){    
+        if(playersQueue_.size() == 1){
+            player_ = *playersQueue_.begin();
+            screen_.focusAtPlayer(player_);
             win();
             return;
         }
     }
-    
+
     if(playersQueue_.empty()){    
         end();
         return;
@@ -291,6 +294,10 @@ void Game::end(){
     
     screen_.drawData(data);
     system("pause");
+}
+
+void Game::fix(){
+    screen_.fix();
 }
 
 
