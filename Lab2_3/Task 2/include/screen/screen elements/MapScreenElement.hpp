@@ -17,7 +17,6 @@ namespace BattleRoyale{
             void focusAtPlayer(std::shared_ptr<Player>);
             void focusAtPlayer(Player &);
             
-
             virtual void update() override;
         private:
             CharMatrix viewData_;

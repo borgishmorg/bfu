@@ -12,7 +12,7 @@ namespace BattleRoyale{
             InfinityGauntlet();
             ~InfinityGauntlet();
 
-            virtual void use(Player & user, Map & mao, Screen & screen) override;
+            virtual void use(Player & user, Map & map, Screen & screen) override;
 
             virtual const std::string toString() const override;
         private:
