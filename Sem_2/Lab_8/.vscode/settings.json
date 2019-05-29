@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "queue": "cpp",
+        "mutex": "cpp",
+        "thread": "cpp",
+        "ostream": "cpp",
+        "condition_variable": "cpp",
+        "chrono": "cpp",
+        "cstdlib": "cpp",
+        "string": "cpp"
+    }
+}
